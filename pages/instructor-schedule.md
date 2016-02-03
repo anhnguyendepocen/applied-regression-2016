@@ -30,6 +30,7 @@ _Thursday, week 2_
  
  _Tuesday, week 3_
  
+ - simpson's paradox example/tips
  - Lecture 4: MLR intro
  - pointer to ggplot2 slides, reading in google drive folder
  - Special topic: multivariate data visualization

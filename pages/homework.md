@@ -11,7 +11,7 @@ Homework assignments will be posted here, in general organized by due date. Unle
 _Due Tuesday 2/7/2016 _
 
 * Read _ISL_ Chapter 3.2-3.3 and _PR_ Chapter 2.
-* (30 points) Complete [Lab 2](../assets/labs/lab2-intro-mlr/lab2-intro-mlr.pdf). Hand in a PDF and Rmd file via Google Drive. The final PDF file should be no more than 6 pages, including graphs.
+* (30 points) Complete [Lab 2](../assets/labs/lab2-mlr/lab2-intro-mlr.pdf). Hand in a PDF and Rmd file via Google Drive. The final PDF file should be no more than 6 pages, including graphs.
 
 _Due Tuesday 2/2/2016, 5pm_ 
 (PDF and Rmd files to be handed in via Google Drive) 

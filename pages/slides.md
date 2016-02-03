@@ -21,7 +21,7 @@ The source code and PDF files associated with the lectures will be posted below 
 
 
 * [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf)
-* [Lab 2](../assets/labs/lab2-intro-mlr.pdf)
+* [Lab 2](../assets/labs/lab2-mlr/lab2-intro-mlr.pdf)
 
 <!--
 
