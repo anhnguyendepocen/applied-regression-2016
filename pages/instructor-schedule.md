@@ -6,9 +6,11 @@ tagline:
 
 concepts to add
 
- - likelihood estimation
+ - likelihood estimation 
+     - relevant reading: Lavine Ch 2.3 (likelihood), 2.4 (estimation), 3.1 (intro regression) and 3.2 (linear models)
+     - program up a simple likelihood optimization
  - simple periodic/time series models (i.e. non-ARIMA)
- - 
+ - original slides for simulation studies
 
 _Tuesday, week 1_
 
