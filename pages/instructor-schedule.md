@@ -4,6 +4,12 @@ title: Class schedules, instructor page
 tagline: 
 ---
 
+concepts to add
+
+ - likelihood estimation
+ - simple periodic/time series models (i.e. non-ARIMA)
+ - 
+
 _Tuesday, week 1_
 
  - Welcome, introductions, review course website and course goals (15 min)

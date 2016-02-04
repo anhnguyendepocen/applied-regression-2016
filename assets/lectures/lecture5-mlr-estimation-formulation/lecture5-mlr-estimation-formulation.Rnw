@@ -11,7 +11,7 @@
 %        The following variables are assumed by the standard preamble:
 %        Global variable containing module name:
 
-\title{Multiple Linear Regression: \\ Least squares and non-linearity}
+\title{Multiple Linear Regression: \\ Least squares, colinearity}
 %	Global variable containing module shortname:
 %		(Currently unused, may be used in future.)
 \newcommand{\ModuleShortname}{multRegression}
@@ -28,6 +28,7 @@
 
 
 \input{../../slide-includes/shortcuts}
+\usepackage{bbm}
 
 \hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
 
@@ -61,12 +62,11 @@
 \bi
     \myitem least squares for MLR: geometry, ``hat matrix''
     \myitem collinearity and non-identifiability
-    \myitem introduction to modeling non-linear relationships
+    \myitem categorical predictors
 \ei
 
-{\bf Example} predicting respiratory disease severity (``lung'' dataset)
+{\bf Example:} predicting respiratory disease severity (``lung'' dataset)
 
-Holding off on inference/diagnostics for another week...
 
 \end{frame}
 
@@ -80,14 +80,6 @@ Holding off on inference/diagnostics for another week...
 	$$ y_i = \beta_0 + \beta_1x_{i1} + \ldots + \beta_px_{ip} + \epsilon_i; \mbox{ } \epsilon_i \stackrel{iid}{\sim} (0,\sigma^2)$$
 	
 \ei
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{D\'ej\`a vu: MLR assumptions}
 
 \begin{block}{Assumptions}
 \bi
@@ -120,62 +112,24 @@ $$\hat \bbeta = (\bX^{T}\bX)^{-1}\bX ^T \by$$
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{D\'ej\`a vu: Sampling distribution of $\hat{\bbeta}$}
-
-If our usual assumptions are satisfied and $\epsilon \stackrel{iid}{\sim} \N{0}{\sigma^2}$ then 
-$$\hat{\bbeta} \sim \N{\bbeta}{\sigma^2 (\bX^{T}\bX)^{-1}}.$$
-
-\bi
-        \myitem This will be used later for inference.
-	\myitem Even without Normal errors, asymptotic Normality of LSEs is possible under reasonable assumptions.
-\ei
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{D\'ej\`a vu: Definitions}
-
-\bi
-	\myitem {\it Fitted values}: $\hat{\by} = \bX \hat{\bbeta} = \bX(\bX^{T}\bX)^{-1}\bX^T \by = \bH \by$
-	\myitem {\it Residuals / estimated errors}: $\hat{\bepsilon} = \by - \hat{\by}$
-	\myitem {\it Residual sum of squares}: $\sum_{i = 1}^{n} \hat{\epsilon_i}^2 = \hat{\bepsilon}^{T}\hat{\bepsilon}$
-	\myitem {\it Residual variance}: $\hat{\sigma^2} = \frac{RSS}{n-p-1}$
-	\myitem {\it Degrees of freedom}: $n - p - 1$
-\ei
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{D\'ej\`a vu: $R^2$ and sums of squares}
-
-\bi
-	\myitem Regression sum of squares $SS_{reg} = \sum (\hat{y}_i -\bar{y})^2$
-	\myitem Residual sum of squares $SS_{res} = \sum (y_i - \hat{y}_i)^2$
-	\myitem Total sum of squares $SS_{tot} = \sum (y_i - \bar{y})^2$
-	\myitem Coefficient of determination
-	$$ R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}= \frac{\sum (\hat{y}_i -\bar{y})^2}{\sum (y_i - \bar{y})^2}$$
-\ei
-
-\end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Not so D\'ej\`a vu: the ``Hat matrix''}
 
-Some properties of the hat matrix:
+\begin{block}{The Hat Matrix}
+The hat matrix transforms the observed $\by$ into the fitted values. \\ 
+$$\hat{\by} = \bX \hat{\bbeta} = \bX(\bX^{T}\bX)^{-1}\bX^T \by = \bH \by$$
+\end{block}
+
+\begin{block}{Some properties of the hat matrix:}
 \bi
 	\myitem It is a projection matrix: $\bH \bH = \bH$
 	\myitem It is symmetric: $\bH^{T} = \bH$
 	\myitem The residuals are $\hat{\epsilon} = (\bI - \bH) \by$
 	\myitem The inner product of $(\bI - \bH) \by$ and $\bH \by$ is zero (predicted values and residuals are uncorrelated).
 \ei
+\end{block}
 
 \end{frame}
 
@@ -422,17 +376,13 @@ summary(mlr6)$coef
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Non-linear relationships: polynomial regression}
-
-Many relationships between X and Y are non-linear. A simple (not necessarily the best) way to account for this is using polynomial forms of X.
+\begin{frame}{Categorical predictors}
 
 \bi
-    \myitem Model of the form
-	$$ y_i = \beta_0 + \beta_1x_{i} + \beta_2 x^{2}_{i} + \ldots + \beta_p x^{p}_{i} + \epsilon_i; \mbox{ } \epsilon_i \stackrel{iid}{\sim} (0,\sigma^2)$$
-	\myitem $p$ is the polynomial order
-	\myitem More polynomial terms can lead to a better approximation of $E(y | x)$, but also higher variability in the fit
-	\myitem Conversely, smaller $p$ can lead to inability to capture $E(y | x)$, but is often more stable
-	\myitem Quadratic and cubic fits are relatively common
+	\myitem Assume $X$ is a categorical / nominal / factor variable with $k$ levels
+	\myitem With only one categorical $X$, we have classic one-way ANOVA design
+	\myitem Can't use a single predictor with levels $1, 2, \ldots, K$ -- this has the wrong interpretation
+	\myitem Need to create {\it indicator} or {\it dummy} variables
 \ei
 
 \end{frame}
@@ -440,15 +390,20 @@ Many relationships between X and Y are non-linear. A simple (not necessarily the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Non-linear relationships}
-
-Some tips on non-linear relationships
+\begin{frame}{Indicator variables}
 
 \bi
-	\myitem You can go as high as $p = n$, but don't do it! ``Overfitting'' data is common practice (unfortunately).
-	\myitem Coefficients become harder to interpret -- you can't increase $x_2$ without changing every other $x_p$
-	\myitem Better (maybe) to think of the model as an estimated curve, whose interpretation is related to the derivative
-	\myitem The literal formulation above is numerically unstable. Better to use orthogonal polynomials (R's \texttt{poly} function)
+	\myitem Let $x$ be a categorical variable with $k$ levels (e.g. with $k=3$ ``red'', ``green'', ``blue'').
+        \myitem Choose one group as the baseline (e.g. ``red'')
+	\myitem Create $(k-1)$ binary terms to include in the model:
+\begin{eqnarray*}
+        x_{1,i} & = & \mathbbm{1} (x_i=\mbox{``green''}) \\
+        x_{2,i} & = & \mathbbm{1} (x_i=\mbox{``blue''}) 
+\end{eqnarray*}
+	\myitem For a model with no additional predictors, pose the model 
+	$$ y_i = \beta_0 + \beta_1 x_{1,i} + \ldots + \beta_{k-1} x_{k-1,i} + \epsilon_{i}$$
+	and estimate parameters using least squares
+	\myitem Note distinction between {\it predictors} and {\it terms}
 \ei
 
 \end{frame}
@@ -456,100 +411,163 @@ Some tips on non-linear relationships
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Non-linear relationships}
+\begin{frame}{Categorical predictor design matrix}
 
-\begin{figure}[t]
-    \includegraphics[width=.8\textwidth]{./Figs/Fig04.pdf}  
-\end{figure}
+Which of the following is a ``correct" design matrix for a categorical predictor with 3 levels?
+
+\begin{displaymath}\tiny
+	\bX_1 = \left[
+		\begin{array}{cccc}
+		1 & 1 & 0 & 0 \\
+		\vdots & \vdots & \vdots & \vdots \\
+		1 & 1 & 0 & 0 \\
+		1 & 0 & 1 & 0 \\
+		\vdots & \vdots & \vdots & \vdots \\
+		1 & 0 & 1 & 0 \\
+		1 & 0 & 0 & 1 \\
+		\vdots & \vdots & \vdots & \vdots \\
+		1 & 0 & 0 & 1 \\
+		\end{array}
+		\right] \quad \mbox{or} \quad
+	\bX_2 = \left[
+		\begin{array}{ccc}
+		1 & 0 & 0 \\
+		\vdots  & \vdots & \vdots \\
+		1 & 0 & 0 \\
+		1 & 1 & 0 \\
+		\vdots & \vdots & \vdots \\
+		1 & 1 & 0 \\
+		1 & 0 & 1 \\
+		\vdots & \vdots & \vdots \\
+		1 & 0 & 1 \\
+		\end{array}
+		\right] \quad \mbox{or} \quad
+	\bX_3 = \left[
+		\begin{array}{ccc}
+		1 & 0 & 0 \\
+		\vdots  & \vdots & \vdots \\
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		\vdots & \vdots & \vdots \\
+		0 & 1 & 0 \\
+		0 & 0 & 1 \\
+		\vdots & \vdots & \vdots \\
+		0 & 0 & 1 \\
+		\end{array}
+		\right] \quad
+	\end{displaymath}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{ANOVA model interpretation}
+
+Using the model $ y_i = \beta_0 + \beta_1 x_{1,i} + \ldots + \beta_{k-1} x_{k-1,i} + \epsilon_{i}$, interpret
+
+\bigskip
+
+$\beta_0 = $
+
+\vspace{1.5cm}
+
+$\beta_1 = $
+
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Non-linear relationships}
+\begin{frame}[t]{Equivalent model}
 
-\begin{figure}[t]
-    \includegraphics[width=.8\textwidth]{./Figs/Fig05.pdf}  
-\end{figure}
+Define the model $y_i = \beta_1 x_{i1} + \ldots + \beta_{k} x_{i, k} + \epsilon_{i}$ where there are indicators for each possible group
+
+\bigskip
+
+$\beta_1 = $
+
+\vspace{1.5cm}
+
+$\beta_2 = $
+
 
 \end{frame}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Non-linear relationships}
+\begin{frame}[fragile]{Categorical predictor example: lung data}
 
-\begin{figure}[t]
-    \includegraphics[width=.8\textwidth]{./Figs/Fig06.pdf}  
-\end{figure}
-
+<<lungMLREducCat, tidy=FALSE, message=FALSE, fig.height=4>>=
+qplot(factor(education), disease, geom="boxplot", data=dat)
+@ 
+ 
 \end{frame}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Non-linear relationships}
+\begin{frame}[fragile]{Categorical predictor example: lung data}
 
-\begin{figure}[t]
-    \includegraphics[width=.8\textwidth]{./Figs/Fig07.pdf}  
-\end{figure}
+$$ dis_i = \beta_0 + \beta_1 educ_{6,i} + \beta_2 educ_{7,i} + \dots + \beta_{9} educ_{14,i} $$
 
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Non-linear relationships}
-
-\tiny
-<<lung-poly1, tidy=FALSE, fig.height=3>>=
-(p <- ggplot(dat, aes(x=education, y=disease)) + geom_point() + 
-    geom_smooth(method="lm", se=FALSE) )
+\small
+<<lungMLRCategorical, tidy=FALSE>>=
+mlr7 <- lm(disease ~ factor(education), data=dat)
+summary(mlr7)$coef
 @
-
+ 
+ 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Non-linear relationships}
+\begin{frame}[fragile]{Categorical predictor releveling}
 
-<<lung-poly2, tidy=FALSE, fig.height=3>>=
-mlr3 <- lm(disease ~ poly(education, 2), data=dat)
-coef(mlr3)
-(p <- p + geom_line(aes(y=predict(mlr3)), color="red") )
+
+$$ dis_i = \beta_0 + \beta_1 educ_{5,i} + \beta_2 educ_{6,i} + \beta_1 educ_{7,i} + \beta_2 educ_{9,i} + \dots + \beta_{14} educ_{14,i} $$
+
+\small
+<<lungMLRRelevel, tidy=FALSE>>=
+dat$educ_new <- relevel(factor(dat$education), ref="8") 
+mlr8 <- lm(disease ~ educ_new, data=dat)
+summary(mlr8)$coef
 @
-
+ 
+ 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Non-linear relationships}
+\begin{frame}[fragile]{Categorical predictor: no baseline group}
 
-<<lung-poly3, tidy=FALSE, fig.height=3>>=
-mlr4 <- lm(disease ~ poly(education, 5), data=dat)
-coef(mlr4)
-(p <- p + geom_line(aes(y=predict(mlr4)), color="green"))
+$$ dis_i = \beta_1 educ_{5,i} + \beta_2 educ_{6,i} + \dots + \beta_{14} educ_{14,i} $$
+
+\small
+<<lungMLRNoBaseline, tidy=FALSE>>=
+mlr9 <- lm(disease ~ factor(education) - 1, data=dat)
+summary(mlr9)$coef
 @
-
+ 
+ 
 \end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Smoothing and splines}
 
-Turns out there's a lot of work on estimating smooth $E(y | x) = f(x)$
-\bi
-	\myitem Rather than polynomials, use smooth spline basis functions with nice properties (stable, smooth, flexible, smooth derivatives)
-	\myitem These are piecewise polynomials
-	\myitem How many to use governs how smooth or wiggly the final fit is
-	\myitem Can introduce explicit penalties for smoothness, which gets you into semi-parametric regression ...
-\ei
+\begin{frame}[fragile]{Creating categories using {\tt cut()}}
 
+$$ dis_i = \beta_1 educ_{low,i} + \beta_2 educ_{med,i} + \dots + \beta_{14} educ_{hi,i} $$
+
+\small
+<<cut, tidy=FALSE, fig.height=2>>=
+dat$educ_3cat <- cut(dat$education, breaks=3, 
+                     labels=c("low", "med", "hi"))
+mlr10 <- lm(disease ~ educ_3cat - 1, data=dat)
+coef(mlr10)
+qplot(educ_3cat, disease, geom="boxplot", data=dat)
+@
+ 
+ 
 \end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -560,25 +578,25 @@ Turns out there's a lot of work on estimating smooth $E(y | x) = f(x)$
 \bi
     \myitem least squares geometry, ``hat matrix''
     \myitem dangers of collinearity and non-identifiability
-    \myitem polynomial regression to model non-linear relationships
+    \myitem categorical predictors
 \ei
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Lab}
-
-Analyze the NHANES dataset. Create a model with the outcome variable of cholesterol ({\tt chol}) that estimates relationships with other variables in the dataset.
-
-<<nhanes, warning=FALSE, eval=FALSE>>=
-library(NHANES)
-data(NHANES)
-?NHANES
-@
-
-
-\end{frame}
+%' \begin{frame}[fragile]{Lab}
+%' 
+%' Analyze the NHANES dataset. Create a model with the outcome variable of cholesterol ({\tt chol}) that estimates relationships with other variables in the dataset.
+%' 
+%' <<nhanes, warning=FALSE, eval=FALSE>>=
+%' library(NHANES)
+%' data(NHANES)
+%' ?NHANES
+%' @
+%' 
+%' 
+%' \end{frame}
 
 
 
