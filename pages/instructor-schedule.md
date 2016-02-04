@@ -45,6 +45,7 @@ _Thursday, week 3_
 
  - Lecture 5: MLR formulation, challenges
  - lab 2 work-time? other activity?
+ - review of simpson's paradox example
  
  <!--
 
