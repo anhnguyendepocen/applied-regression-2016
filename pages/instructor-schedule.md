@@ -41,6 +41,11 @@ _Thursday, week 2_
  - pointer to ggplot2 slides, reading in google drive folder
  - Special topic: multivariate data visualization
  
+_Thursday, week 3_
+
+ - Lecture 5: MLR formulation, challenges
+ - lab 2 work-time? other activity?
+ 
  <!--
 
  Week 3: 
