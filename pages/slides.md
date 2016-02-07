@@ -13,8 +13,8 @@ The source code and PDF files associated with the lectures will be posted below 
 * Lecture 1: Introduction to Regression  \[  [S](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf) \]
 * Lecture 2: Simple Linear Regression and Least Squares \[  [S](../assets/lectures/lecture2-slr-basics/lecture2-slr-basics.pdf) \]
 * Lecture 3: Simple Linear Regression and ANOVA \[ [S](../assets/lectures/lecture3-slr-anova/lecture3-slr-anova.pdf) \|  [A](../assets/lectures/lecture3-slr-anova/lecture3-slr-anova-annotated.pdf) \]
-* Lecture 4: Introduction to Multiple Linear Regression \[ [S](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf)  \]
-* Lecture 5: Multiple Linear Regression: Least Squares and Identifiability \[ [S](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf)  \]
+* Lecture 4: Introduction to Multiple Linear Regression \[ [S](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf) \|  [A](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro-annotated.pdf) \]
+* Lecture 5: Multiple Linear Regression: Least Squares and Identifiability \[ [S](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf) \|  [A](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation-annotated.pdf) \]
 
 * Special topic: [Data visualization principles](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html)
 * Special topic: [Data visualization using ggplot2](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html#1)
@@ -26,9 +26,6 @@ The source code and PDF files associated with the lectures will be posted below 
 
 <!--
 
-\|  [A](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro-annotated.pdf)
-
-\|  [A](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation-annotated.pdf) 
 * Lecture 6: Multiple Linear Regression: Categorical Predictors \[ [S](../assets/lectures/lecture6-mlr-categorical/lecture6-mlr-categorical.pdf) \|  [A](../assets/lectures/lecture6-mlr-categorical/lecture6-mlr-categorical-annotated.pdf)  \]
 * Lecture 7: Multiple Linear Regression: Parameter Inference \[ [S](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf) \|  [A](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference-annotated.pdf)  \]
 * Lecture 8: Multiple Linear Regression: Multiple testing \[ [S](../assets/lectures/lecture8-mlr-multiple-testing/lecture8-mlr-multiple-testing.pdf) \| [A](../assets/lectures/lecture8-mlr-multiple-testing/lecture8-mlr-multiple-testing-annotated.pdf) \]
