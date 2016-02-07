@@ -50,6 +50,7 @@ Examples of topics
 * non-linear regression
 * mixed/random effects models
 * a comparison and exploration of model-selection methods, e.g. using different criteria (PRESS, Mallow's Cp, AIC, BIC, adjusted R^2), or stepwise-selection methods
+* comparing methods of testing for non-linear relationships (e.g. splines vs. polynomials), in linear or logistic regression settings.
 * ... or any other slightly more advanced model-fitting method (please feel free to choose something that you are interested in learning more about, but not something that you have already done) 
 
 The data analysis write-up will contain a section for each group member's analysis and a conclusion that summarizes the results. 
