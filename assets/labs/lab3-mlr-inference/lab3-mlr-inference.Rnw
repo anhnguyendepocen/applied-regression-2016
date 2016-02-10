@@ -1,6 +1,6 @@
  \documentclass{article}
 
-\input{../slide-includes/statsTeachR-preamble-labs}
+\input{../../slide-includes/statsTeachR-preamble-labs}
 
 \begin{document}
 
@@ -16,7 +16,7 @@ knit_hooks$set(source = function(x, options) {
 
 \section*{Lab 3: Parameter inference in multiple linear regression}
 
-To better understand the sampling distribution of our the fitted $\beta$ regression coefficients, you will perform several small simulation studies. The basic code for the simulation study can be found in the \href{https://raw.githubusercontent.com/nickreich/stat-modeling-2015/gh-pages/assets/labs/sampling-distribution-simulation.R}{sampling-distribution-simulation.R} file. 
+To better understand the sampling distribution of our the fitted $\beta$ regression coefficients, you will perform several small simulation studies. The basic code for the simulation study can be found in the \href{https://raw.githubusercontent.com/nickreich/applied-regression-2016/gh-pages/assets/labs/lab3-mlr-inference/sampling-distribution-simulation.R}{sampling-distribution-simulation.R} file. 
 Open this code file and read it carefully. In all, this code is running a small simulation study to generate a ``sampling distribution'' of the regression coefficients for a simple linear regression model
 $ {\mathbb E}[y|x] = \beta_0 + \beta_1\cdot x $
 where both $x$ and $y$ are simulated data. Try to understand what each line of code is doing before you run the file, and then run it all the way through.
