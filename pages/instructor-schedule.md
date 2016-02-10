@@ -11,6 +11,8 @@ concepts to add
      - program up a simple likelihood optimization
  - simple periodic/time series models (i.e. non-ARIMA)
  - original slides for simulation studies
+ - cross-validation
+ - confounding
 
 _Tuesday, week 1_
 

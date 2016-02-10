@@ -38,7 +38,7 @@ names(body_dat) <- c("biac.diam", "pelvic.bredth", "bitro.diam", "chest.dep", "c
 Let's start by just familiarizing ourselves with the dataset at hand.
 
 \begin{exercise}
-Refer to the link provided for the data description. What was this data originally collect for? What were the authors trying to investigate? 
+Refer to the link provided for the data description. What was this data originally collected for? What were the authors trying to investigate? 
 \end{exercise}
 
 There are 21 different body dimension measurements provided as well as height and weight. We should first explore some of the data to see what the distribution of some of these measurements look like.
@@ -90,7 +90,7 @@ Use residual plots to evaluate whether the conditions of least squares regressio
 
 \subsection*{Multiple linear regression}
 
-As you probably noticed in plots made above, there are more than 1 possible predictors for a persons weight in this data set. Fortunately, we are not restrained to using only one predictor. We can add another predictor to the model and check its significance and re-check the model diagnostics. This process is intuitively exhausting, as there are often hundreds of possible combinations of variables that are significant on their own as a single predictor of weight. However, this is does not necessarily mean that they including all of them will make the strongest model.
+As you probably noticed in plots made above, there are more than 1 possible predictors for a persons weight in this data set. Fortunately, we are not restrained to using only one predictor. We can add another predictor to the model and check its significance and re-check the model diagnostics. This process is intuitively exhausting, as there are often hundreds of possible combinations of variables that are significant on their own as a single predictor of weight. However, this does not necessarily mean that including all of them will make the strongest model.
 
 Let's start slow by adding one possible predictor to \hlkwd{lm\_chest}. In order to see if chest is still a significant predictor of weight after we've accounted for the height of the person, we can add the \hlkwd{height} term into the model.
 
@@ -133,7 +133,7 @@ The interpretation of the coefficients in multiple regression is slightly differ
 We will start with a ``full'' model that predicts weight based on the girths of the shoulder, chest, waist, navel, hip, thigh, bicep, forearm, knee and calf. 
 
 \begin{exercise}
-Which variable would you expect to have the highest p-value in this model? Why? \textit{Hint:} Think about which variable would you expect to not have any or little association with weight.
+Which variable would you expect to have the highest p-value in this model? Why? \textit{Hint:} Think about which variable you would expect to have no or little association with weight.
 \end{exercise}
 
 Let's run the model...

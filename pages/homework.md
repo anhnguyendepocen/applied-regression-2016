@@ -63,7 +63,8 @@ _Due Thursday 3/5/2015, 11am_
    + Examine the impact of the number of covariates on the MSE (or 95% confidence interval coverage) of a regression coefficient for one predictor variable.
    + In an SLR setting, evaluate the degree to which the MSE or confidence interval coverage is impacted by non-constant variance of the residuals.
    + Show how the power to detect a non-zero regression coefficient changes as a function of the sample size and/or the residual variance. 
-   + Examine the average bias or MSE in estimating a regression coefficient if the residuals are drawn from a symmetric distribution with mean zero, but with increasing variance (e.g. a Cauchy or Student's T distribution). 
+   + Examine the average bias or MSE in estimating a regression coefficient if the residuals are drawn from a symmetric distribution with mean zero, but with increasing variance (e.g. a Cauchy or Student's T distribution). \
+   + Examine whether a spline method (penalized splines, natural splines, b-splines, etc...) is as powerful at detecting a non-linear (i.e. quadratic, logarithmic, ...) relationship between two variables, as the true function itself.
 
 _Due Thursday 2/26/2015, 11:30am_ 
 
