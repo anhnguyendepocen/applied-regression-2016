@@ -8,9 +8,14 @@ Homework assignments will be posted here, in general organized by due date. Unle
 
 **Collaboration on homework is expected and encouraged, although you must write up your own assignment. No copying or cutting and pasting.**
 
+_Due Thursday 2/25/2016, 5pm_
+ 
+* (30 points) Lab 3.
+
 _Due Tuesday 2/16/2016, 5pm_
 
 * (20 points) Revise and resubmit the report on the dataset that you handed in on 2/2/2016. The new report should include some of the information that you had written previously, should make improvements suggested from the earlier version, and have 1 or 2 additional multiple linear regression models. If appropriate, use dummy variables to model categorical predictors. Interpret some of the MLR model coefficients in the context of your particular dataset. The report should be less than 6 pages, including all figures, and should be submitted as both PDF and Rmd formats.
+* Read _ISL_ Chapter 6.1, _PR_ Ch. 3, 7 and 8.
 
 
 _Due Tuesday 2/9/2016_

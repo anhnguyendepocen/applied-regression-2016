@@ -49,6 +49,26 @@ _Thursday, week 3_
  - lab 2 work-time? other activity?
  - review of simpson's paradox example
  
+_Tuesday, week 4_
+
+ - class cancelled, Nick in Baltimore/DC
+
+_Thursday, week 4_
+ 
+ - lecture 6: MLR model checking and diagnostics
+ - 
+ 
+_Tuesday, week 5_
+ 
+ - no class: Monday schedule
+
+_Thursday, week 5_
+ 
+ - lecture 7: MLR parameter inference
+ - quiz?
+ - simulation lecture?
+
+ 
  <!--
 
  Week 3: 
