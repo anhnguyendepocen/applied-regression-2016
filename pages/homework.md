@@ -10,7 +10,7 @@ Homework assignments will be posted here, in general organized by due date. Unle
 
 _Due Thursday 2/25/2016, 5pm_
  
-* (30 points) Lab 3.
+* (30 points) [Lab 3](../assets/labs/lab3-mlr-inference/lab3-mlr-inference.pdf).
 
 _Due Tuesday 2/16/2016, 5pm_
 
