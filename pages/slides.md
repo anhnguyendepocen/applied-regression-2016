@@ -15,7 +15,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * Lecture 3: Simple Linear Regression and ANOVA \[ [S](../assets/lectures/lecture3-slr-anova/lecture3-slr-anova.pdf) \|  [A](../assets/lectures/lecture3-slr-anova/lecture3-slr-anova-annotated.pdf) \]
 * Lecture 4: Introduction to Multiple Linear Regression \[ [S](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf) \|  [A](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro-annotated.pdf) \]
 * Lecture 5: Multiple Linear Regression: Least Squares and Identifiability \[ [S](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf) \|  [A](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation-annotated.pdf) \]
-* Lecture 6: Multiple Linear Regression: Model checking and diagnostics \[ [S](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking.pdf) \]
+* Lecture 6: Multiple Linear Regression: Model checking and diagnostics \[ [S](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking.pdf) \| [A](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking-annotated.pdf) \]
 
 * Special topic: [Data visualization principles](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html)
 * Special topic: [Data visualization using ggplot2](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html#1)
