@@ -57,10 +57,10 @@
 \begin{frame}{Today's Lecture}
 
 \bi
-        \myitem Sampling distribution of $\hat{\bbeta}$
-	\myitem Confidence intervals
-	\myitem Hypothesis tests for individual coefficients
-	\myitem Global tests (next week!)
+    \myitem Sampling distribution of $\hat{\bbeta}$
+    \myitem Confidence intervals
+    \myitem Hypothesis tests for individual coefficients
+    \myitem Multiple testing
 \ei
 
 \end{frame}
@@ -203,8 +203,7 @@ Note that $t$ is a symmetric distribution that converges to a Normal as $n-p-1$ 
 
 \begin{frame}[fragile]{Back to the example}
 
-\scriptsize
-<<lungMLRTesting, tidy=FALSE>>=
+<<lungMLRTesting, tidy=FALSE, size="scriptsize">>=
 summary(mlr1)
 @
  
@@ -289,10 +288,52 @@ abline(h=c(confint(mlr1)[3,1], confint(mlr1)[3,2]), lty=2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Today's Big Ideas}
+\begin{frame}{Progress report}
 
 \bi
-        \myitem Basic parameter inference for multiple linear regression models
+    \myitem Sampling distribution of $\hat{\bbeta}$
+    \myitem Confidence intervals
+    \myitem Hypothesis tests for individual coefficients
+    \myitem Multiple testing
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Multiple testing - preserving your Type I error rate}
+
+\begin{figure}[t]
+    \includegraphics[width=.4\textwidth]{significant.png}  
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Multiple testing - preserving your Type I error rate}
+
+\begin{figure}[t]
+    \includegraphics[width=.8\textwidth]{significant-headline.png}  
+\end{figure}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Inference about multiple coefficients}
+
+Our model contains multiple parameters; often we want ask a question about multiple coefficients simultaneously. I.e. ``are any of these $k$ coefficients significantly different from 0?'' This is equivalent to performing multiple tests (or looking at confidence ellipses):
+\beqa
+	H_{01} : \beta_1 & = & 0\\
+	H_{02} : \beta_2 & = & 0\\
+	\vdots & = & \vdots \\	
+	H_{0k} : \beta_k & = & 0\\
+\eeqa
+where each test has a size of $\alpha$
+\bi
+	\myitem For any individual test, $P(\mbox{reject } H_{0i} | H_{0i}) = \alpha$
 \ei
 
 \end{frame}
@@ -300,15 +341,198 @@ abline(h=c(confint(mlr1)[3,1], confint(mlr1)[3,2]), lty=2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Lab on regression inference}
+\begin{frame}[t]{Inference about multiple coefficients}
 
-Run the code for today's class (on the website), and modify it to answer the following questions:
+
+For any individual test, $P(\mbox{reject } H_{0i} | H_{0i}) = \alpha$.
+
+\vspace{2em}
+
+But it DOES NOT FOLLOW that 
+$$P(\mbox{reject \underline{at least one} } H_{0i} | \mbox{all } H_{0i} \mbox{are true}) = \alpha.$$
+This is called the Family-wise error rate (FWER). Ignore it at your own peril!
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Family-wise error rate}
+
+To calculate the FWER
 \bi
-    \myitem Compute the 95\% confidence interval coverage for $\beta_1$. What is it and is it what you would expect?
-    \myitem Given the constant values defined at the top of the file, determine what the sampling distribution for $\beta_1$ should be. Using the estimated values of the $\hat\beta_1$, calculate summary metrics and or use appropriate visualizations to determine whether these your simulated distribution of $\hat\beta_1$ matches with the theoretical distribution.
-    \myitem Adapt the simulation to simulate data for two covariates, $x_1$ and $x_2$, using {\tt mvrnorm()}. Define $x_1$ and $x_2$ so that you may modify the degree of correlation between them. Run the simulation again for two scenarios, one with low and one with high correlation. For each of these scenarios, does the 95\% confidence interval coverage change?
+	\myitem First note $P(\mbox{no rejections} | \mbox{all } H_{0i} \mbox{are true}) = (1-\alpha)^{k}$
+	\myitem It follows that
+	\beqa
+		\mbox{FWER}  & = & P(\mbox{at least one rejection} | \mbox{all } H_{0i} \mbox{are true}) \\
+                & = &  1 - (1-\alpha)^{k}
+	\eeqa
+\ei
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Family-wise error rate}
+
+$$ \mbox{FWER} = 1 - (1-\alpha)^{k}$$ 
+<<FWERPlot, fig.height=3.5, size="scriptsize">>=
+alpha <- .05
+k <- 1:100
+FWER <- 1-(1-alpha)^k
+qplot(k, FWER, geom="line") + geom_hline(yintercept = 1, lty=2)
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Addressing multiple comparisons}
+
+Three general approaches
+\bi
+	\myitem Do nothing in a reasonable way
+	\bi
+		\item Don't trust scientifically implausible results
+		\item Don't over-emphasize isolated findings
+	\ei
+	\myitem Correct for multiple comparisons
+	\bi
+		\item Often, use the Bonferroni correction and use $\alpha_i = \alpha /k$ for each test
+		\item Thanks to the Bonferroni inequality, this gives an overall $FWER \leq \alpha$
+	\ei
+	\myitem Use a global test
 \ei
 
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Global tests}
+
+Compare a smaller ``null" model to a larger ``alternative" model
+\bi
+	\myitem Smaller model must be nested in the larger model
+	\myitem That is, the smaller model must be a special case of the larger model
+	\myitem For both models, the $RSS$ gives a general idea about how well the model is fitting
+	\myitem In particular, something like 
+		$$\frac{RSS_{S} - RSS_{L}}{RSS_{L}}$$
+	compares the relative $RSS$ of the models
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Nested models}
+
+\bi
+	\myitem These models are nested:
+	\beqa
+		\mbox{Smaller} & = & \mbox{Regression of } Y \mbox{ on } X_1 \\
+		\mbox{Larger} & = & \mbox{Regression of } Y \mbox{ on } X_1, X_2, X_3, X_4
+	\eeqa
+	\myitem These models are not:
+	\beqa
+		\mbox{Smaller} & = & \mbox{Regression of } Y \mbox{ on } X_2 \\
+		\mbox{Larger} & = & \mbox{Regression of } Y \mbox{ on } X_1, X_3
+	\eeqa
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Global $F$ tests}
+
+\bi
+	\myitem Compute the test statistic 
+		$$F_{obs} = \frac{(RSS_{S} - RSS_{L})/(df_{S} - df_{L})}{RSS_{L}/df_{L}}$$
+	\myitem If $H_{0}$ (the null model) is true, then $F_{obs} \sim F_{df_{S} - df_{L}, df_{L}}$
+	\myitem Note $df_s = n -p_{S} -1$ and $df_{L} = n - p_{L} - 1$
+	\myitem We reject the null hypothesis if the p-value is above $\alpha$, where
+		$$\mbox{p-value} = P(F_{df_{S} - df_{L}, df_{L}} > F_{obs}) $$
+	
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Global $F$ tests}
+
+There are a couple of important special cases for the $F$ test
+\bi
+	\myitem The null model contains the intercept only
+	\bi
+		\item When people say ANOVA, this is often what they mean (although all $F$ tests are based on an analysis of variance)
+	\ei
+	\myitem The null model and the alternative model differ only by one term
+	\bi
+		\item Gives a way of testing for a single coefficient
+		\item Turns out to be equivalent to a two-sided $t$-test: $t^{2}_{df_{L}} \sim F_{1, df_{L}}$
+	\ei	
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung data: multiple coefficients simultaneously}
+
+You can test multiple coefficients simultaneously using the $F$ test
+
+\scriptsize
+<<MLRmultcoef>>=
+mlr_null <- lm(disease ~ nutrition, data=dat)
+mlr1 <- lm(disease ~ nutrition+ airqual + crowding + smoking, data=dat)
+anova(mlr_null, mlr1)
+@
+
+This test shows that airqual, crowding, and smoking together significantly improve the fit of our model (assuming model diagnostics look good). Further analyses may be warranted to determine which, if any, coefficients are not different from 0.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Lung data: single coefficient test}
+
+The $F$ test is equivalent to the $t$ test when there's only one parameter of interest
+
+<<MLRsinglecoef, size="scriptsize">>=
+mlr_null <- lm(disease ~ nutrition, data=dat)
+mlr1 <- lm(disease ~ nutrition + airqual, data=dat)
+anova(mlr_null, mlr1)
+summary(mlr1)$coef
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Today's Big Ideas}
+
+\begin{block}{Basic parameter inference for multiple linear regression models} 
+\bi
+        \myitem How to determine ``significance'' of your covariates
+        \myitem $F$ tests can control for multiple comparisons!
+\ei
+\end{block}
+
+\href{http://nickreich.github.io/applied-regression-2016/assets/labs/lab3a-global-tests/global-tests.html}{Multiple testing activity!}
+
+\end{frame}
+
 
 \end{document}
