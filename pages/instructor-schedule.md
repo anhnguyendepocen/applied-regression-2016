@@ -66,8 +66,11 @@ _Tuesday, week 5_
 
 _Thursday, week 5_
  
- - lecture 7: MLR parameter inference
  - quiz?
+ - lecture 7: MLR parameter inference with multiple testing
+ - lab 3a
+ 
+ 
  - simulation lecture?
 
  
