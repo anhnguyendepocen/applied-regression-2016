@@ -26,6 +26,9 @@ The source code and PDF files associated with the lectures will be posted below 
 * [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf)
 * [Lab 2](../assets/labs/lab2-mlr/lab2-intro-mlr.pdf)
 * [Lab 3](../assets/labs/lab3-mlr-inference/lab3-mlr-inference.pdf)
+* [R code for Lab 3](../assets/labs/sampling-distribution-simulation.R)
+* [Lab 3a](../assets/labs/lab3a-global-tests/global-tests.html)
+
 
 <!--
 \|  [A](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference-annotated.pdf)
