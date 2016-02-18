@@ -16,7 +16,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * Lecture 4: Introduction to Multiple Linear Regression \[ [S](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf) \|  [A](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro-annotated.pdf) \]
 * Lecture 5: Multiple Linear Regression: Least Squares and Identifiability \[ [S](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf) \|  [A](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation-annotated.pdf) \]
 * Lecture 6: Multiple Linear Regression: Model checking and diagnostics \[ [S](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking.pdf) \| [A](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking-annotated.pdf) \]
-* Lecture 7: Multiple Linear Regression: Parameter Inference and Multiple Testing \[ [S](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf)   \]
+* Lecture 7: Multiple Linear Regression: Parameter Inference and Multiple Testing \[ [S](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf) \|  [A](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference-annotated.pdf)  \]
 
 * Special topic: [Data visualization principles](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html)
 * Special topic: [Data visualization using ggplot2](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html#1)
@@ -31,7 +31,7 @@ The source code and PDF files associated with the lectures will be posted below 
 
 
 <!--
-\|  [A](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference-annotated.pdf)
+
 * Lecture 8: Multiple Linear Regression: Multiple testing \[ [S](../assets/lectures/lecture8-mlr-multiple-testing/lecture8-mlr-multiple-testing.pdf) \| [A](../assets/lectures/lecture8-mlr-multiple-testing/lecture8-mlr-multiple-testing-annotated.pdf) \]
 * Lecture 9: Multiple Linear Regression: Model checking \[ [S](../assets/lectures/lecture9-mlr-model-checking/lecture9-mlr-model-checking.pdf) \| [A](../assets/lectures/lecture9-mlr-model-checking/lecture9-mlr-model-checking-annotated.pdf) \]
 * Lecture 10: Multiple Linear Regression: Model selection \[ [S](../assets/lectures/lecture10-mlr-model-selection/lecture10-mlr-model-selection.pdf) \| [A](../assets/lectures/lecture10-mlr-model-selection/lecture10-mlr-model-selection-annotated.pdf) \]
