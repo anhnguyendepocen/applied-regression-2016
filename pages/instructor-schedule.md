@@ -71,6 +71,10 @@ _Thursday, week 5_
  - lab 3a
  
  
+_Tues, week 6_
+ 
+ - lecture 8: model selection
+
  - simulation lecture?
 
  
