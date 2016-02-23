@@ -117,9 +117,10 @@ Different answers to these questions will yield different final models.
 
 
 \bi
-        \myitem If we are asking which is the ``true" model, we will have a bad time
+    \myitem If we are asking which is the ``true" model, we will have a bad time
 	\myitem In practice, issues with sample size, collinearity, and available predictors are real problems
 	\myitem It is often possible to differentiate between better models and less-good models, though
+	\myitem The key decisions in model selection almost always involve balancing model complexity with the potential for overfitting.
 \ei
 \end{frame}
 
@@ -164,7 +165,7 @@ Again, we're focusing on $f(x)$ in the model specification. Once you've selected
         \myitem Residual mean square error
         \myitem Akaike Information Criterion (AIC)
         \myitem Bayes Information Criterion (BIC)
-    	\myitem Prediction RSS (PRESS)
+    	\myitem Cross-validated error (similar to Prediction RSS, aka PRESS)
         \myitem $F$- or $t$-tests (via stepwise selection)
         \myitem Likelihood ratio tests (F-tests)
 \ei
@@ -371,6 +372,7 @@ Common choices for $k$ are 5 or 10.
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Model building is an art}
@@ -382,6 +384,7 @@ Common choices for $k$ are 5 or 10.
         \myitem detailed data exploration 
         \myitem checking assumptions 
         \myitem careful model building
+        \myitem awareness of the potential for overfitting
         \myitem patience patience patience
 \ei
 
@@ -521,11 +524,81 @@ Failure (survival) time & number of failures
 \end{frame}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{A more modern approach: shrinkage/penalization}
+\begin{frame}[fragile]{Example: lung data}
 
-\begin{block}{Penalized regression} 
+<<loadData, echo=FALSE, message=FALSE>>=
+dat <- read.table("../lecture5-mlr-estimation-formulation/lungc.txt", header=TRUE)
+require(ggplot2)
+theme_set(theme_bw())
+opts_chunk$set(size = 'footnotesize')
+options(width=60)
+@
+
+<<plotEduc, fig.height=3>>=
+ggplot(dat, aes(education, disease)) + geom_point() + 
+    geom_smooth(method="lm", color="red") +
+    geom_smooth(color="blue")
+@
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example: lung data }
+
+Run a LOOCV to determine the optimal polynomial degree on education.
+
+<<runCV, fig.height=3>>=
+n <- 5
+mses <- data.frame(deg=1:n, mse=rep(NA, n))
+for(i in 1:n) {
+    fm <- lm(disease ~ poly(education, i), data=dat)
+    mses[i, "mse"] <- sum( ( resid(fm)/(1-hatvalues(fm)) )^2 )/nrow(dat)
+}
+ggplot(mses, aes(deg, mse)) + geom_blank()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example: lung data }
+
+Run a LOOCV to determine the optimal polynomial degree on education.
+
+<<runCV-withplot, fig.height=3>>=
+n <- 5
+mses <- data.frame(deg=1:n, mse=rep(NA, n))
+for(i in 1:n) {
+    fm <- lm(disease ~ poly(education, i), data=dat)
+    mses[i, "mse"] <- sum( ( resid(fm)/(1-hatvalues(fm)) )^2 )/nrow(dat)
+}
+ggplot(mses, aes(deg, mse)) + geom_line() + geom_point()
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example: lung data (on your own)}
+
+Use the {\tt cv.glm()} function to calculate the k-fold cross-validated error. Are the results the same?
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{A more modern approach to variable selection}
+
+\begin{block}{Penalized regression (a.k.a. ``shrinkage'', ``regularization'')} 
 
 \bi
     \myitem adds an explicit penalty to the least squares criterion
@@ -548,6 +621,7 @@ Whole branches of modern statistics are devoted to figuring out what to do when 
     \myitem There is no one-size-fits-all formula for model selection.
     \myitem Consult a variety of metrics, weight more heavily ones that may be more suited to your application (e.g. cross-validated metrics for prediction,...)
     \myitem Beware of black-box selection methods.
+    \myitem Cross-validation can be an important tool.
     \myitem Consider penalized regression methods.
 \ei
 \end{block}
