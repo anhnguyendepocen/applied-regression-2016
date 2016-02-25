@@ -15,7 +15,7 @@ Week |       |     | Topic   | In-class resources | Reading
  3   | Feb | 2, 4   | Least squares, multiple linear regression |  [Lec 4](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf), [Lec 5](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf), [Lab 2](../assets/labs/lab2-intro-mlr.pdf) | _ISL_ Ch 3.2-3.3; _PR_ Ch 2.
  4   |     | 9, 11 | MLR: model checking and diagnostics | [Lec 6](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking.pdf) | _ISL_ Ch. 6.1, _PR_ Ch. 7, 8
  5   |     | 18     | MLR: inference, multiple testing | [Lec 7](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf),  [Lab 3a](../assets/labs/lab3a-global-tests/global-tests.html) | _PR_ Ch. 3
- 6   |     | 23, 25 | MLR: model selection | [Lec 8](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection.pdf) | _ISL_ Ch. 5, 6.1
+ 6   |     | 23, 25 | MLR: model selection | [Lec 8](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection.pdf), [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf), [Lec 9](../assets/lectures/lecture9-mlr-interactions/lecture9-mlr-interactions.pdf) | _ISL_ Ch. 5, 6.1
  7   | Mar | 1, 3   | Simulation studies | <!--[Lec 9](../assets/lectures/lecture9-mlr-model-checking/lecture9-mlr-model-checking.pdf), [Lec 10](../assets/lectures/lecture10-mlr-model-selection/lecture10-mlr-model-selection.pdf)--> | _PR_ Ch. 10
  8   |     | 8, 10 | TBD | <!--[Lab 4](../assets/labs/lab4-mlr-diagnostics.pdf), [Lec 11](../assets/lectures/lecture11-mlr-interaction-transformation/lecture11-mlr-interactions-transformations.pdf)--> | 
      |     | 15, 17 | Spring Break! | |

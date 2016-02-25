@@ -8,6 +8,11 @@ Homework assignments will be posted here, in general organized by due date. Unle
 
 **Collaboration on homework is expected and encouraged, although you must write up your own assignment. No copying or cutting and pasting.**
 
+_Due Thursday 3/3/2016, 5pm_
+
+* [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf).
+
+
 _Due Tuesday 3/1/2016_
 
 * Read _ISL_ Chapter 5, 6.1: on model selection and cross-validation.
