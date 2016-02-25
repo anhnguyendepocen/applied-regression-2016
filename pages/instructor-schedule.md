@@ -74,6 +74,11 @@ _Tues, week 6_
  
  - lecture 8: model selection
 
+_Thurs, week 6_
+
+ - lecture 8, finish; lecture 9 mlr interactions
+ - lab 4 in class
+
  - simulation lecture?
 
  
