@@ -16,6 +16,7 @@ The six pitfalls are:
 * Double complication. 
 
 The presentation should provide the following details:
+
  * Define the pitfall
  * Give some detail about an example of the pitfall. You may use the example cited by the original author of the post. Consider adding additinal detail, such as figures/results from the actual paper/example he cites.
  * The quick recipe for avoiding the pitfall.
