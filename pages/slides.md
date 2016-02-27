@@ -23,6 +23,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * Special topic: [Data visualization principles](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html)
 * Special topic: [Data visualization using ggplot2](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html#1)
 * Special topic: [Multivariate data visualization](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-NHANES/Presentation-NHANES.html#1)
+* Special topic: [Simulation Studies](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf)
 
 
 * [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf)

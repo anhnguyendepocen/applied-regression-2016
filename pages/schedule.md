@@ -16,7 +16,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  4   |     | 9, 11 | MLR: model checking and diagnostics | [Lec 6](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking.pdf) | [Lab 2](../assets/labs/lab2-mlr/lab2-intro-mlr.pdf) | _ISL_ Ch. 6.1, _PR_ Ch. 7, 8
  5   |     | 18     | MLR: inference, multiple testing | [Lec 7](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf) |  | _PR_ Ch. 3
  6   |     | 23, 25 | MLR: model selection | [Lec 8](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection.pdf), [Lec 9](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions.pdf) | [Lab 3](../assets/labs/lab3-mlr-inference/lab3-mlr-inference.pdf) | _ISL_ Ch. 5, 6.1, _PR_ Ch. 10
- 7   | Mar | 1, 3   | Simulation studies | <!--[Lec 9](../assets/lectures/lecture9-mlr-model-checking/lecture9-mlr-model-checking.pdf), [Lec 10](../assets/lectures/lecture10-mlr-model-selection/lecture10-mlr-model-selection.pdf)--> | [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf) |
+ 7   | Mar | 1, 3   | Simulation studies | [Sims](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf) | [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf) |
  8   |     | 8, 10 | TBD | <!--[Lab 4](../assets/labs/lab4-mlr-diagnostics.pdf), [Lec 11](../assets/lectures/lecture11-mlr-interaction-transformation/lecture11-mlr-interactions-transformations.pdf)--> | | 
      |     | 15, 17 | Spring Break! | | |
  9   |     | 22, 24 | Splines in regression, power simulations | <!--[Lec 12](../assets/lectures/lecture12-splines/lecture12-splines.pdf), [ST 2](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)--> | | _ISL_ Ch 7

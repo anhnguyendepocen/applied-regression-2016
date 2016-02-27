@@ -1,0 +1,326 @@
+%% beamer/knitr slides 
+%% for Statistical Modeling and Data Visualization course @ UMass
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%        Global variable containing module name:
+
+\title{Special Topic Lecture: \\ Implementing simulation studies}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{multRegression}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\textunderscore US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=MainColor}
+
+
+%	******	Document body begins here	**********************
+
+\begin{document}
+
+%	Title page
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%	******	Everything through the above line must be placed at
+%		the top of any TeX file using the statsTeachR standard
+%		beamer preamble. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% acutal slides
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{What is simulation?}
+
+
+
+        \begin{block}{Definitions}
+        	
+
+		\begin{itemize}
+
+			\item{Broadly: ``The technique of imitating the behaviour of some situation or process (whether economic, military, mechanical, etc.) by means of a suitably analogous situation or apparatus, esp. for the purpose of study or personnel training.'' (from the {\em OED})}
+
+			\item{In science: Creating a model that imitates a physical or biological process.}
+
+        		\item{In statistics: The generation of data from a model using rules of probability.}
+                                                
+		\end{itemize}
+
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}{Simple examples of simulations}
+
+
+        \begin{itemize}
+
+                \item Drawing pseudo-random numbers from a probability distribution (e.g. proposal distributions, ...).
+                
+                \item Generating data from a specified model (e.g. building a template dataset to test a method, calculating statistical power).
+                
+                \item Resampling existing data (e.g. permutation, bootstrap).
+
+        \end{itemize}
+
+\vskip2em
+
+\end{frame}
+
+
+
+
+\begin{frame}{What simulations have you run?}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Random number generation is simulation}
+
+
+\begin{block}{{\tt rnorm()}, {\tt rpois()}, etc...}
+
+Built-in functions for simulating from parametric distributions.
+
+<<paramSim>>=
+y <- rnorm(100, mean=10, sd=5)
+(p <- rpois(5, lambda=25))
+@
+
+<<plotDists, out.width='\\linewidth', echo=FALSE, fig.height=3>>=
+par(mfrow=c(1,2))
+curve(dnorm(x, mean=10, sd=5), -5, 25, ylab="f(x)", las=1, bty="n", main="dnorm(x, mean=10, sd=5)")
+plot(dpois(0:50, lambda=25), type="h", ylab="", las=1, xlab="x", bty="n", main="dpois(x, lambda=25)")
+@
+
+
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Resampling data is simulation}
+
+\begin{block}{{\tt sample()}}
+
+Base R function for sampling data (with or without replacement).
+<<sample>>=
+p
+sample(p, replace=FALSE)
+sample(p, replace=TRUE)
+@
+
+
+\end{block}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Generating data from a model is simulation}
+
+\begin{block}{A Simple Linear Regression model}
+
+\begin{equation*}
+Y_i  =  \beta_0 + \beta_1 X_i + \epsilon_i
+\end{equation*}
+
+What is needed to simulate data (i.e. $Y_i$) from this model?
+\begin{itemize}
+\item The $X_i$: fixed quantities.
+\item Error distribution: e.g. $\epsilon_i  \stackrel{iid}{\sim}  N(0, \sigma^2)$.
+\item Values for parameters: $\beta_0$, $\beta_1$, $\sigma^2$.
+\end{itemize}
+
+
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Generating data from $Y_i  =  \beta_0 + \beta_1 X_i + \epsilon_i$}
+
+<<simData, tidy=FALSE, fig.height=3.5, message=FALSE, size="scriptsize">>=
+require(ggplot2)
+n <- 100; b0=4; b1=2; sigma=2     ## define parameters
+x <- runif(n, -10, 10)            ## fix the X's
+eps <- rnorm(n, sd=sigma)         ## simulate the e_i's
+y <- b0 + b1*x + eps              ## compute the y_i's
+qplot(x, y) + geom_point() + geom_smooth(method="lm", se=FALSE)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{What is a simulation study?}
+
+\begin{block}{Why run a simulation study?}
+\bi
+    \myitem to evaluate whether your statistical method works!
+    \myitem to determine how much variability you might reasonably expect from your estimates
+    \myitem to calculate power for a study
+\ei
+\end{block}
+
+Especially useful when data model and/or statistical method are complex, and do not have tidy theoretical results.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Circle of Life}
+
+\begin{figure}[t]
+    \includegraphics[width=.8\textwidth]{../../slide-includes/CircleOfLife.pdf}  
+\end{figure}
+
+\end{frame} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{What is a simulation study?}
+
+\begin{block}{A statistician's laboratory}
+\bi
+    \myitem control over the parameters of your data generating model
+    \myitem systematic exploration of possible parameters
+    \myitem careful evaluation of how one or more methods perform
+\ei
+\end{block}
+
+\begin{block}{Enables experimental answers to methodological questions }
+\bi
+    \myitem Under a certain data model, which of a set of methods provides the best estimates of the true values?
+    \myitem How much bias and variability can I expect from  the method I am using on data that I want to analyze?
+    \myitem MLR: How many predictors can I include before my methods become unreliable? 
+    \myitem MLR: What effect will correlation between predictors have on my estimates?
+\ei
+\end{block}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to run a simulation study}
+
+\begin{block}{Key steps}
+\bi
+    \myitem Identify a data generating model and its associated parameters
+    \myitem Define the question and scope: which parameters do you want to investigate? what ranges?
+    \myitem Write code to run the analysis that is easily replicated (maybe write a function?)
+    \myitem For each distinct set of parameters, generate and analyze data, storing the results. (Note: try to minimize operations within your loops, and consider running code that will parallelize easily)
+    \myitem Summarize the results.
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Recall: stepwise selection}
+
+\begin{block}{E.g. Forward selection}
+\bi
+    \myitem Start with ``baseline" (usually intercept-only) model
+    \myitem For every possible model that adds one term, evaluate the criterion you've settled on
+    \myitem Choose the one with the best ``score" (lowest AIC, smallest p-value)
+    \myitem For every possible model that adds one term to the current model, evaluate your criterion
+    \myitem Repeat until either adding a new term doesn't improve the model or all variables are included
+\ei
+\end{block}
+
+It is with great ambivalence/trepidation that I reveal to you that stepwise selection can be easily implemented in R using, e.g. {\tt stepAIC()} in the MASS package.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{Let's design a simulation study about stepwise methods!}
+
+\begin{block}{What specific method-performance measures could we evaluate?}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{Let's design a simulation study about stepwise methods!}
+
+\begin{block}{What model/data features could we investigate?}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]{Let's design a simulation study about stepwise methods!}
+
+\begin{block}{Pick a low-risk, high-return combination of measures/features that you think will tell the best story.}
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Technical notes on simulations}
+
+\begin{block}{}
+\bi
+    \myitem Decide how you will handle, report ``failed'' analyses prior to running the simulation. E.g. no convergence, etc...
+    \myitem For reproducbility, consider setting a random seed using {\tt set.seed()}. I like picking one from \href{http://www.random.org}{random.org}
+    \myitem Perform calculations that can be vectorized outside the simulation loop to save computational time. E.g. calculating bias.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Simulation study recap}
+
+\begin{block}{}
+\bi
+    \myitem Simulation studies are key tools for evaluating different statistical methods.
+    \myitem You will save time by planning your study carefully up front.
+    \myitem We proposed some possible designs for a study on stepwise selection method performance. In small groups, you will work to answer these questions over the next few weeks.
+\ei
+\end{block}
+
+\end{frame}
+
+
+\end{document}
