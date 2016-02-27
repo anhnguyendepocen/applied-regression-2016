@@ -79,6 +79,9 @@ _Thurs, week 6_
  - lecture 8, finish; lecture 9 mlr interactions
  - lab 4 in class
 
+_Tues, week 7_
+
+ - quiz 3
  - simulation lecture?
 
  
