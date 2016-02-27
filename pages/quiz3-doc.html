@@ -68,7 +68,7 @@ img {
 </div>
 
 
-<p>The quiz is available at this link XXX.</p>
+<p>The quiz is available at: <a href="http://goo.gl/forms/VjWJKTZLVV"><a href="http://goo.gl/forms/VjWJKTZLVV" class="uri">http://goo.gl/forms/VjWJKTZLVV</a></a>.</p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <p>We will load the data set JAMA-HR.csv which contains data from a report in the Journal of the American Medical Association.</p>
@@ -95,7 +95,7 @@ nrow(jama)</code></pre>
 </div>
 <div id="models" class="section level2">
 <h2>Models</h2>
-<p>Here are several different model outputs for you to consider. Recall that the <code>coef()</code> function returns a named vector with the coefficients from the fitted model.</p>
+<p>Here are several different model outputs for you to consider.</p>
 <pre class="r"><code>mod1 = lm(HR ~ 1, data=jama) 
 coef(mod1)</code></pre>
 <pre><code>## (Intercept) 

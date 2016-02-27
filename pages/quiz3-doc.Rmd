@@ -10,7 +10,7 @@ library(ggplot2)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The quiz is available at this link XXX.
+The quiz is available at: [http://goo.gl/forms/VjWJKTZLVV](http://goo.gl/forms/VjWJKTZLVV).
 
 ## Overview
 
