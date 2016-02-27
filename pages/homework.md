@@ -8,6 +8,10 @@ Homework assignments will be posted here, in general organized by due date. Unle
 
 **Collaboration on homework is expected and encouraged, although you must write up your own assignment. No copying or cutting and pasting.**
 
+_Due Thursday 3/10 in class_
+
+* [Small group presentation on pitfalls of data analysis](group-pres-1.html). 
+
 _Due Thursday 3/3/2016, 5pm_
 
 * [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf).

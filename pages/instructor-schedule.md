@@ -11,7 +11,6 @@ concepts to add
      - program up a simple likelihood optimization
  - simple periodic/time series models (i.e. non-ARIMA)
  - original slides for simulation studies
- - confounding
 
 _Tuesday, week 1_
 
@@ -84,6 +83,13 @@ _Tues, week 7_
  - quiz 3
  - simulation lecture?
 
+_Thurs, week 7_
+
+_Tues, week 8_
+
+_Thurs, week 8_
+
+ - student presentations about common analysis pitfalls (45 min).
  
  <!--
 
