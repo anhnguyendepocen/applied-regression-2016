@@ -1,7 +1,6 @@
 ---
 title: "Quiz: Interpreting Coefficients"
 author: "Nicholas Reich, adapted from Project MOSAIC"
-date: "February 27, 2016"
 output: html_document
 ---
 
@@ -10,26 +9,23 @@ library(ggplot2)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The quiz is available at: [http://goo.gl/forms/VjWJKTZLVV](http://goo.gl/forms/VjWJKTZLVV).
+The quiz is available at: <http://goo.gl/forms/VjWJKTZLVV>
 
 ## Overview
 
-We will load the data set JAMA-HR.csv which contains data from a report in the Journal of the American Medical Association.
-
-Each case is an individual person. The variables are 
+We will load the data set JAMA-HR.csv which contains data from a report in the Journal of the American Medical Association. Each case is an individual person. The variables are 
 
  - Temp: body temperature in degrees F 
  - HR: heart rate in beats per minute
  - Sex: coded as F and M
 
-Here are some initial commands to load and look at the dataset: 
 ```{r, message=FALSE}
 jama = fetch::fetchData("JAMA-HR.csv")
 nrow(jama)
 head(jama)
 ```
 
-```{r plotData, fig.height=3}
+```{r plotData, fig.height=3, echo=FALSE}
 ggplot(jama, aes(x=Temp, y=HR)) + geom_point(aes(shape=Sex, color=Sex))
 ```
 
