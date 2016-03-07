@@ -20,7 +20,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  8   |     | 8, 10 | Power simulation | [ST 2](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)  | [pitfall](group-pres-1.html) | 
      |     | 15, 17 | Spring Break! | | |
  9   |     | 22, 24 | Splines; Logistic regression | <!--[Lec 12](../assets/lectures/lecture12-splines/lecture12-splines.pdf), -->  | [sims](group-pres-2.html) | _ISL_ Ch 7, H2*; _ISL_ 4.1-3, _OI_ 8
- 10  |     | 29, 31  | Likelihood, Missing data | <!--[Lec 13](../assets/lectures/lecture13-logistic-regression/lecture13-logistic-regression.pdf), [Lab 5](../assets/labs/lab5-amelia-missing-data.pdf)-->  | | _IST_ Ch 2.3-2.4; [List](missing-data-reading-list.html)
+ 10  |     | 29, 31  | Likelihood; Missing data | <!--[Lec 13](../assets/lectures/lecture13-logistic-regression/lecture13-logistic-regression.pdf), [Lab 5](../assets/labs/lab5-amelia-missing-data.pdf)-->  | | _IST_ Ch 2.3-2.4; [List](missing-data-reading-list.html)
  11  | Apr | 5, 7   | TBD | | | 
  12  |     | 12, 14 | Longitudinal data analysis | <!--[Lec 14](../assets/lectures/lecture14-longitudinal-data/lecture14-longitudinal-data.pdf), [R](../assets/labs/wits-and-wagers-analysis.R)--> | |
  13  |     | 19, 21 | Project prep, presentations | | |

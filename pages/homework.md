@@ -10,6 +10,11 @@ Homework assignments will be posted here, in general organized by due date. Unle
 
 _Due Thursday 3/10 in class_
 
+* [Small group presentation on stepwise model selection simulations](group-pres-2.html). 
+
+
+_Due Thursday 3/10 in class_
+
 * [Small group presentation on pitfalls of data analysis](group-pres-1.html). 
 
 _Due Thursday 3/3/2016, 5pm_
