@@ -6,7 +6,7 @@ tagline:
 
 *This is the working schedule for the course. It is subject to change.*
 
-_ISL_ refers to the textbook _Introduction to Statistical Learning_, _PR_ refers to the textbook _Practical Regression and Anova using R_, and _OI_ refers to the _OpenIntro Statistics_ textbook.
+_ISL_ refers to the textbook _Introduction to Statistical Learning_, _PR_ refers to the textbook _Practical Regression and Anova using R_, _OI_ refers to the _OpenIntro Statistics_ textbook, and _IST_ refers to the _Introduction to Statistical Thought_ text.
 
 Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
@@ -17,11 +17,11 @@ Week |       |     | Topic   | Notes | HW Due | Reading
  5   |     | 18     | MLR: inference, multiple testing | [Lec 7](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf) |  | _PR_ Ch. 3
  6   |     | 23, 25 | MLR: model selection | [Lec 8](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection.pdf), [Lec 9](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions.pdf) | [Lab 3](../assets/labs/lab3-mlr-inference/lab3-mlr-inference.pdf) | _ISL_ Ch. 5, 6.1, _PR_ Ch. 10
  7   | Mar | 1, 3   | Simulation studies | [Sims](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf) | [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf) |
- 8   |     | 8, 10 | TBD | <!--[Lab 4](../assets/labs/lab4-mlr-diagnostics.pdf), [Lec 11](../assets/lectures/lecture11-mlr-interaction-transformation/lecture11-mlr-interactions-transformations.pdf)--> | | 
+ 8   |     | 8, 10 | Power simulation | [ST 2](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)  | [pitfalls](group-pres-1.html) | 
      |     | 15, 17 | Spring Break! | | |
- 9   |     | 22, 24 | Splines in regression, power simulations | <!--[Lec 12](../assets/lectures/lecture12-splines/lecture12-splines.pdf), [ST 2](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)--> | | _ISL_ Ch 7
- 10  |     | 29, 31  | Missing data, logistic regression | <!--[Lec 13](../assets/lectures/lecture13-logistic-regression/lecture13-logistic-regression.pdf), [Lab 5](../assets/labs/lab5-amelia-missing-data.pdf)-->  | | [List](missing-data-reading-list.html), _ISL_ 4.1-4.3, _OI_ 8
- 11  | Apr | 5, 7   | data visualization | | | [List](data-viz-reading-list.html)
+ 9   |     | 22, 24 | Splines in regression; Logistic regression | <!--[Lec 12](../assets/lectures/lecture12-splines/lecture12-splines.pdf), -->  | [stepwise](group-pres-1.html) | _ISL_ Ch 7, Harrel Ch 2; _ISL_ 4.1-4.3, _OI_ 8
+ 10  |     | 29, 31  | Likelihood, Missing data | <!--[Lec 13](../assets/lectures/lecture13-logistic-regression/lecture13-logistic-regression.pdf), [Lab 5](../assets/labs/lab5-amelia-missing-data.pdf)-->  | | _IST_ Ch 2.3-2.4; [List](missing-data-reading-list.html), 
+ 11  | Apr | 5, 7   | TBD | | | 
  12  |     | 12, 14 | Longitudinal data analysis | <!--[Lec 14](../assets/lectures/lecture14-longitudinal-data/lecture14-longitudinal-data.pdf), [R](../assets/labs/wits-and-wagers-analysis.R)--> | |
  13  |     | 19, 21 | Project prep, presentations | | |
  14  |     | 26     | Project presentations | | |

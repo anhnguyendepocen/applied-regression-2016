@@ -85,10 +85,16 @@ _Tues, week 7_
 
 _Thurs, week 7_
 
+ - simulation workshop
+
 _Tues, week 8_
+
+ - power simulation lecture
+ - simulation study workshop
 
 _Thurs, week 8_
 
+ - review of key concepts from first 1/2 of semester
  - student presentations about common analysis pitfalls (45 min).
  
  <!--

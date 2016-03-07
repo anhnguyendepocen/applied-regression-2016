@@ -33,7 +33,8 @@ The aim of this course is to provide fundamental statistical concepts and tools 
 **Required books** (all freely available online) <br>
 &nbsp; &nbsp; Faraway JJ. 2002. [Practical Regression and Anova using R](http://cran.r-project.org/doc/contrib/Faraway-PRA.pdf). <br>
 &nbsp; &nbsp; James G, Witten D, Hastie T, and Tibshirani R. 2014. [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/). <br>
-&nbsp; &nbsp; Diez D, Barr C, and &Ccedil;etinkaya-Rundel M. 2012. [OpenIntro Statistics, 2nd Ed.](http://www.openintro.org/stat/index.php)
+&nbsp; &nbsp; Diez D, Barr C, and &Ccedil;etinkaya-Rundel M. 2012. [OpenIntro Statistics, 2nd Ed.](http://www.openintro.org/stat/index.php) <br>
+&nbsp; &nbsp; Lavine M. 2010. [Introduction to Statistical Thought](http://people.math.umass.edu/~lavine/Book/book.html).
 
 **Recommended books** <br>
 &nbsp; &nbsp; Hefferon J. 2014. [Linear Algebra](http://joshua.smcvt.edu/linearalgebra/) (free textboox) <br>
