@@ -72,7 +72,7 @@ theme_set(theme_bw())
 
 \bi
     \myitem The ability of a method/test to detect an effect, conditional on that effect actually existing.
-    \myitem The probability that our test rejects the null hypothesis when the null hypothesis is not true.
+    \myitem The probability that our test rejects the null hypothesis when the null hypothesis is not true, or Pr(reject $H_0 | H_A$).
     \myitem Or, ``finding a signal that is really there'' 
 \ei
 
@@ -256,14 +256,14 @@ mean(reject)
 \begin{frame}[fragile]{Power by simulation: two different flavors}
 
 
-\begin{block}{Option 1: generate all data from scratch}
+\begin{block}{Option 1: generate all data from scratch \tiny{(e.g. \href{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0035564}{Reich et al (2012)})}}
 \bi
     \myitem will generate ``clean'' data
     \myitem hard to insert authentic noise: outliers, missingness, correlated predictor structure    
 \ei
 \end{block}
 
-\begin{block}{Option 2: resample predictors from a {\em training} dataset, simulate outcome}
+\begin{block}{Option 2: resample predictors from a {\em training} dataset, simulate outcome \tiny{(e.g. \href{http://arxiv.org/abs/1410.3515}{Kleinman and Huang (2014)}, \href{http://www.sciencedirect.com/science/article/pii/S0167947313003721}{Meyers et al. (2014)})}}
 \bi
     \myitem preserves structure of real predictor data
     \myitem requires a large dataset similar to the one you will be analyzing
@@ -300,7 +300,7 @@ Inputs: $nsim$; $nobs$, $X$, a $n$x$p$ design matrix; a simulation model $y \sim
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}[fragile]{Power by resampling: example}
+\begin{frame}[fragile]{Power by resampling: MLR example}
 
 \footnotesize You plan to do a follow-up study to the one that generated our {\tt lung} dataset. You want to replicate the results that show a significant impact of smoking on the severity of disease. You don't have a lot of money to conduct the study, so you want to enroll as few participants as possible. 
 
@@ -322,6 +322,7 @@ summary(mlr)
 \begin{block}{Inputs}
 \begin{itemize}
     \item $nsim = 1000$
+    \item $n_{obs} = 30$
     \item $X$, taken from {\tt lung} dataset.
     \item $\alpha=0.05$
     \item Simulation model: 
@@ -371,7 +372,7 @@ for(i in 1:nsim) {
 \begin{frame}[fragile]{Power by resampling: example code}
 
 
-So we can say that if we were to repeat this study (in a similar population) with a sample size of \Sexpr{nobs}, our study would have \Sexpr{round(pwr, 2)} to detect a true relationship between smoking and disease severity.
+So we can say that if we were to repeat this study (in a similar population) with a sample size of \Sexpr{nobs}, our study would have \Sexpr{round(pwr, 2)} probability of detecting a true relationship between smoking and disease severity, of the magnitude assumed above ($\beta_4$ = \Sexpr{round(coef(mlr)[5], 1)}).
 
 \end{frame}
 
