@@ -12,14 +12,14 @@ Week |       |     | Topic   | Notes | HW Due | Reading
 ---- | ----- | --- | ------- | ----- |:------:| -------
  1   | Jan | 19, 21  | Simple Linear Regression &nbsp; | [Lec 1](../assets/lectures/lecture1-intro-regression/lecture1-intro-regression.pdf), [Lec 2](../assets/lectures/lecture2-slr-basics/lecture2-slr-basics.pdf) | |  _ISL_ Ch 1, 3.1; _PR_ Ch 1, 2.
  2   |     | 26, 28  &nbsp;| Simple Linear Regression (con't) |  [Lec 3](../assets/lectures/lecture3-slr-anova/lecture3-slr-anova.pdf) | |  _ISL_ Ch 3.1; _PR_ Ch 2.
- 3   | Feb | 2, 4   | Least squares, multiple linear regression |  [Lec 4](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf), [Lec 5](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf) | [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf) | _ISL_ Ch 3.2-3.3; _PR_ Ch 2.
+ 3   | Feb | 2, 4   | Least squares, multiple regr. |  [Lec 4](../assets/lectures/lecture4-mlr-intro/lecture4-mlr-intro.pdf), [Lec 5](../assets/lectures/lecture5-mlr-estimation-formulation/lecture5-mlr-estimation-formulation.pdf) | [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf) | _ISL_ Ch 3.2-3.3; _PR_ Ch 2.
  4   |     | 9, 11 | MLR: model checking and diagnostics | [Lec 6](../assets/lectures/lecture6-mlr-checking/lecture6-mlr-checking.pdf) | [Lab 2](../assets/labs/lab2-mlr/lab2-intro-mlr.pdf) | _ISL_ Ch. 6.1, _PR_ Ch. 7, 8
  5   |     | 18     | MLR: inference, multiple testing | [Lec 7](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf) |  | _PR_ Ch. 3
  6   |     | 23, 25 | MLR: model selection | [Lec 8](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection.pdf), [Lec 9](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions.pdf) | [Lab 3](../assets/labs/lab3-mlr-inference/lab3-mlr-inference.pdf) | _ISL_ Ch. 5, 6.1, _PR_ Ch. 10
  7   | Mar | 1, 3   | Simulation studies | [Sims](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf) | [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf) |
  8   |     | 8, 10 | Power simulation | [ST 2](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)  | [pitfalls](group-pres-1.html) | 
      |     | 15, 17 | Spring Break! | | |
- 9   |     | 22, 24 | Splines in regression; Logistic regression | <!--[Lec 12](../assets/lectures/lecture12-splines/lecture12-splines.pdf), -->  | [stepwise](group-pres-1.html) | _ISL_ Ch 7, Harrel Ch 2; _ISL_ 4.1-4.3, _OI_ 8
+ 9   |     | 22, 24 | Splines; Logistic regression | <!--[Lec 12](../assets/lectures/lecture12-splines/lecture12-splines.pdf), -->  | [stepwise](group-pres-1.html) | _ISL_ Ch 7, Harrel Ch 2; _ISL_ 4.1-4.3, _OI_ 8
  10  |     | 29, 31  | Likelihood, Missing data | <!--[Lec 13](../assets/lectures/lecture13-logistic-regression/lecture13-logistic-regression.pdf), [Lab 5](../assets/labs/lab5-amelia-missing-data.pdf)-->  | | _IST_ Ch 2.3-2.4; [List](missing-data-reading-list.html), 
  11  | Apr | 5, 7   | TBD | | | 
  12  |     | 12, 14 | Longitudinal data analysis | <!--[Lec 14](../assets/lectures/lecture14-longitudinal-data/lecture14-longitudinal-data.pdf), [R](../assets/labs/wits-and-wagers-analysis.R)--> | |
