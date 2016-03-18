@@ -316,6 +316,40 @@ points(range, lm.bs5$fitted.values, type = 'l', col = "red", lwd = 2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Another setting for splines}
+\scriptsize
+<<flu-data, fig.height=3.5, message=FALSE, warning=FALSE>>=
+library(cdcfluview)
+library(dplyr)
+library(lubridate)
+usflu <- get_flu_data("national", "ilinet", years=2010:2015)
+usflu <- mutate(usflu, 
+                date = as.Date(paste0(YEAR, sprintf("%02d", WEEK), "00"), 
+                               format="%Y%W%w"),
+                ili_weighted = X.UNWEIGHTED.ILI,
+                dec_date = decimal_date(date),
+                time_in_year = dec_date%%1)
+ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Another setting for splines}
+\scriptsize
+<<flu-trig-model, fig.height=3.5, message=FALSE, warning=FALSE>>=
+library(mgcv)
+trig_mdl <- lm(ili_weighted ~ sin(dec_date*2*pi) + cos(dec_date*2*pi), 
+               data=usflu)
+spline_mdl <- gam(ili_weighted ~ s(time_in_year, bs="cc"), data=usflu)
+usflu$trig_preds <- predict(trig_mdl)
+usflu$spl_preds <- predict(spline_mdl)
+@
+
+\end{frame}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Take-home points for spline approaches (1)}
