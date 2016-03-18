@@ -19,6 +19,8 @@ The source code and PDF files associated with the lectures will be posted below 
 * Lecture 7: Multiple Linear Regression: Parameter Inference and Multiple Testing \[ [S](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference.pdf) \|  [A](../assets/lectures/lecture7-mlr-inference/lecture7-mlr-inference-annotated.pdf)  \]
 * Lecture 8: Multiple Linear Regression: Model Selection \[ [S](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection.pdf) \| [A](../assets/lectures/lecture8-model-selection/lecture8-mlr-model-selection-annotated.pdf)  \]
 * Lecture 9: Multiple Linear Regression: Modeling Interactions \[ [S](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions.pdf) \| [A](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions-annotated.pdf) \]
+* Lecture 10: Using splines in regression \[ [S](../assets/lectures/lecture10-splines/lecture10-splines.pdf)  \]
+
 
 * Special topic: [Data visualization principles](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html)
 * Special topic: [Data visualization using ggplot2](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html#1)
@@ -41,7 +43,6 @@ The source code and PDF files associated with the lectures will be posted below 
 * Lecture 9: Multiple Linear Regression: Model checking \[ [S](../assets/lectures/lecture9-mlr-model-checking/lecture9-mlr-model-checking.pdf) \| [A](../assets/lectures/lecture9-mlr-model-checking/lecture9-mlr-model-checking-annotated.pdf) \]
 * Lecture 10: Multiple Linear Regression: Model selection \[ [S](../assets/lectures/lecture10-mlr-model-selection/lecture10-mlr-model-selection.pdf) \| [A](../assets/lectures/lecture10-mlr-model-selection/lecture10-mlr-model-selection-annotated.pdf) \]
 * Lecture 11: Multiple Linear Regression: Practical miscellany (added variable plots, interactions, predictor transformations) \[ [S](../assets/lectures/lecture11-mlr-interaction-transformation/lecture11-mlr-interactions-transformations.pdf) \| [A](../assets/lectures/lecture11-mlr-interaction-transformation/lecture11-mlr-interactions-transformations-annotated.pdf) \]
-* Lecture 12: Using splines in regression \[ [S](../assets/lectures/lecture12-splines/lecture12-splines.pdf) \| [A](../assets/lectures/lecture12-splines/lecture12-splines-annotated.pdf) \]
 * Lecture 13: Logistic Regression \[ [S](../assets/lectures/lecture13-logistic-regression/lecture13-logistic-regression.pdf) \| A \]
 * Lecture 14: Longitudinal Data Analysis \[ [S](../assets/lectures/lecture14-longitudinal-data/lecture14-longitudinal-data.pdf) \| [A](../assets/lectures/lecture14-longitudinal-data/lecture14-longitudinal-data-annotated.pdf) \]
 * Special Topic 1: Implementing Simulation Studies \[ [S](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf) \| [A](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation-annotated.pdf) \]
