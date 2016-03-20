@@ -38,18 +38,15 @@ Additionally, each member of the group will lead a particular thread of analysis
 
 For this independent data analysis portion of the project, the two major paths that you can take are 
 
-1. to fit a specialized model to the data (i.e. not just MLR with main effect covariates) and interpret the output from the methods that you have used. Examples here include regression trees, incorporating natural splines into an MLR model, or a mixed-effects model.
-2. to create a simulation study to determine how much power a particular type of analysis has to detect a hypothetical association between variables in your dataset. 
-  - For example, you could use a covariate resampling approach (to be described in class) to simulate new versions of your dataset that retain the covariate correlation structures present in your data, simulate new outcomes with known association(s), and fit a model to try and identify those association(s). This could be particularly compelling if you worked with a teammate who ran an analysis using one particular method and you calculated the power for their analytic method. 
-  - As another example, you could run a simulation that tries to replicate the results of previous studies that show the pitfalls of backwards or forwards selection. You could design a simulation to evaluate the effectiveness of forward and/or backward selection methods for identifying associated predictor variables.
+1. to fit a specialized model to the data (i.e. not just MLR with main effect covariates) and interpret the output from the methods that you have used. Examples here could include regression trees, incorporating splines into an MLR model, a multiple imputation analysis, or a mixed-effects model.
+2. to create a simulation study that answers a particular question about your dataset.  For example, you could use a covariate resampling approach (described in class) to estimate the power to detect a particular association of interest. This could be particularly compelling if you worked with a teammate who ran an analysis using one particular method and you calculated the power for their analytic method. 
 
 Examples of topics
 
 * regression trees
-* natural or B-splines
+* natural, B-, or penalized splines
 * non-linear regression
 * mixed/random effects models
-* a comparison and exploration of model-selection methods, e.g. using different criteria (PRESS, Mallow's Cp, AIC, BIC, adjusted R^2), or stepwise-selection methods
 * comparing methods of testing for non-linear relationships (e.g. splines vs. polynomials), in linear or logistic regression settings.
 * ... or any other slightly more advanced model-fitting method (please feel free to choose something that you are interested in learning more about, but not something that you have already done) 
 
@@ -77,13 +74,9 @@ As an example: Your group receives 40/50 points for the "final product produced 
 
 
 #### Deadlines
-TBD.
-
-<!-- 
-* Fri Mar 27: Groups propose a dataset
-* Fri Apr 3: Individual topics proposed (1 paragraph summary, submitted to instructor on Google Drive)
-* Mon Apr 13: Draft of group data description write-up due, 5pm
-* Mon Apr 20: Draft of individual data analysis due, 5pm
-* Thu Apr 23: Group 1 (and Group 2?) present, project handed in on Fri 4/24 by 5pm
-* Tue Apr 28: Group 3 (and Group 2?) presents, project handed in on Wed 4/29 by 5pm
--->
+* Mon Mar 28: Groups propose a dataset
+* Fri Apr 1: Individual topics proposed (1 paragraph summary, submitted to instructor on Google Drive)
+* Mon Apr 11: Draft of group data description write-up due, 5pm
+* Mon Apr 18: Draft of individual data analysis due, 5pm
+* Thu Apr 21: Two groups present, project handed in on Wed 4/27 by 5pm
+* Tue Apr 26: Two groups present, project handed in on Wed 4/27 by 5pm
