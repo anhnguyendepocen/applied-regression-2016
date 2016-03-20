@@ -316,7 +316,7 @@ points(range, lm.bs5$fitted.values, type = 'l', col = "red", lwd = 2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Another setting for splines}
+\begin{frame}[fragile]{Another setting where splines could be useful}
 \scriptsize
 <<flu-data, fig.height=3.5, message=FALSE, warning=FALSE>>=
 library(cdcfluview)
@@ -336,15 +336,53 @@ ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Another setting for splines}
+\begin{frame}[fragile]{Time series analysis}
+
+\begin{block}{These observations are time-series data}
+
+\bi
+    \myitem Time is a ``special'' covariate: order matters, independence assumption often violated.
+    \myitem There are more formal and systematic methods of analyzing time-series data that we are not going to discuss today, e.g. ARIMA models. (If interested, consider STAT 597TS.)
+    \myitem A few nice resources: Hydman and Athanasopoulos's {\em Forecasting: Principles and Practice}, at \href{https://www.otexts.org/fpp}{https://www.otexts.org/fpp}, or Shumway and Stoffer, {\em Time Series Analysis and Its Applications: with R examples}.
+\ei
+
+\end{block}
+
+<<flu-plot, fig.height=3.5, message=FALSE, warning=FALSE, echo=FALSE>>=
+ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
+@
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Fit a trigonometric model}
+We could fit a seasonal model like this:
+$$\mathbb E [y_t] = \beta_0 + \beta_1\cdot \sin(2\pi t) + \cos(1\pi t)$$
 \scriptsize
 <<flu-trig-model, fig.height=3.5, message=FALSE, warning=FALSE>>=
-library(mgcv)
+usflu <- usflu[!is.na(usflu$dec_date),] ## sloppy: removing one "week 53"
 trig_mdl <- lm(ili_weighted ~ sin(dec_date*2*pi) + cos(dec_date*2*pi), 
                data=usflu)
-spline_mdl <- gam(ili_weighted ~ s(time_in_year, bs="cc"), data=usflu)
 usflu$trig_preds <- predict(trig_mdl)
+ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point() + 
+    geom_line(aes(y=trig_preds), color="red")
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Fit a smoothing splines model}
+\scriptsize
+<<flu-spline-model, fig.height=3.5, message=FALSE, warning=FALSE>>=
+library(mgcv)
+spline_mdl <- gam(ili_weighted ~ s(time_in_year, bs="cc"), data=usflu)
 usflu$spl_preds <- predict(spline_mdl)
+ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point() + 
+    geom_line(aes(y=trig_preds), color="red") +
+    geom_line(aes(y=spl_preds), color="blue") 
 @
 
 \end{frame}
@@ -361,7 +399,7 @@ usflu$spl_preds <- predict(spline_mdl)
 \ei
 \end{block}
 
-\includegraphics[width=.7\linewidth]{figs/pediatrics-example.png}
+\includegraphics[width=.7\linewidth]{pediatrics-example.png}
 
 
 \end{frame}
