@@ -278,7 +278,7 @@ matlines(x, bb, ylim = c(0,1), lty = 1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Example: lidar data}
+\begin{frame}[fragile]{Example: lidar data B-splines}
 
 <<modelSpl, fig.height=4, message=FALSE>>=
 require(splines)
@@ -291,7 +291,7 @@ points(range, lm.bs3$fitted.values, type = 'l', col = "red", lwd = 2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Example: lidar data}
+\begin{frame}[fragile]{Example: lidar data B-splines}
 
 <<modelSpl5, fig.height=4, message=FALSE>>=
 lm.bs5 = lm(y ~ bs(range, df=5))
@@ -303,22 +303,50 @@ points(range, lm.bs5$fitted.values, type = 'l', col = "red", lwd = 2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Example: lidar data}
+\begin{frame}[fragile]{Example: lidar data B-splines}
 
 <<modelSpl6, fig.height=4, message=FALSE>>=
-lm.bs5 = lm(y ~ bs(range, df=10))
+lm.bs10 = lm(y ~ bs(range, df=10))
 plot(range, y, xlab = "Range", ylab = "log ratio", pch = 18)
-points(range, lm.bs5$fitted.values, type = 'l', col = "red", lwd = 2)
+points(range, lm.bs10$fitted.values, type = 'l', col = "red", lwd = 2)
 @
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Quick intro to penalized splines}
+
+\begin{block}{Generalized Additive Models (GAMs)}
+\bi
+    \myitem A model dependent on unknown smooth functions of predictors.
+    \myitem Typically estimated using penalized likelihood maximization.
+    \myitem The basic idea of penalization is to discount models that overfit the data.
+    \myitem Key feature of GAMs: smoothness can be selected automatically.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Example: lidar data penalized splines}
+$$\mathbb E[y|range] = \beta_0 + s(range)$$
+<<modelgam, fig.height=3.5, message=FALSE>>=
+library(mgcv) ## try ?mgcv for more info
+gam.penspl <-  gam(y ~ s(range)) ## no knots/df specified!
+plot(range, y, xlab = "Range", ylab = "log ratio", pch = 18)
+points(range, fitted(gam.penspl), type = 'l', col = "red", lwd = 2)
+points(range, lm.bs5$fitted.values, type = 'l', col = "blue", lwd = 2)
+@
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Another setting where splines could be useful}
 \scriptsize
-<<flu-data, fig.height=3.5, message=FALSE, warning=FALSE>>=
+<<flu-data, fig.height=2.5, message=FALSE, warning=FALSE>>=
 library(cdcfluview)
 library(dplyr)
 library(lubridate)
@@ -336,7 +364,7 @@ ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Time series analysis}
+\begin{frame}[fragile]{This is not a ``real'' time series analysis}
 
 \begin{block}{These observations are time-series data}
 
@@ -348,10 +376,6 @@ ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
 
 \end{block}
 
-<<flu-plot, fig.height=3.5, message=FALSE, warning=FALSE, echo=FALSE>>=
-ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
-@
-
 \end{frame}
 
 
@@ -359,11 +383,11 @@ ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point()
 
 \begin{frame}[fragile]{Fit a trigonometric model}
 We could fit a seasonal model like this:
-$$\mathbb E [y_t] = \beta_0 + \beta_1\cdot \sin(2\pi t) + \cos(1\pi t)$$
+$$\mathbb E [y_t] = \beta_0 + \beta_1\cdot \sin(2\pi t) + \beta_2\cdot\cos(2\pi t)$$
 \scriptsize
-<<flu-trig-model, fig.height=3.5, message=FALSE, warning=FALSE>>=
-usflu <- usflu[!is.na(usflu$dec_date),] ## sloppy: removing one "week 53"
-trig_mdl <- lm(ili_weighted ~ sin(dec_date*2*pi) + cos(dec_date*2*pi), 
+<<flu-trig-model, fig.height=2.5, message=FALSE, warning=FALSE>>=
+usflu <- usflu[!is.na(usflu$dec_date),] ## remove "week 53"
+trig_mdl <- lm(ili_weighted~sin(dec_date*2*pi)+cos(dec_date*2*pi), 
                data=usflu)
 usflu$trig_preds <- predict(trig_mdl)
 ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point() + 
@@ -374,7 +398,7 @@ ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point() +
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Fit a smoothing splines model}
+\begin{frame}[fragile]{Fit a penalized splines model}
 \scriptsize
 <<flu-spline-model, fig.height=3.5, message=FALSE, warning=FALSE>>=
 library(mgcv)
@@ -415,6 +439,16 @@ ggplot(usflu, aes(x=date, y=ili_weighted)) + geom_point() +
     \myitem ``Penalized splines'' can reduce this sensitivity at the cost of more complex model and estimation (More in {\em ISL} Chapter 7, Biostat Methods 3, anything about Generalized Additive Models (e.g. {\tt mgcv} package and {\tt gam() function}), one of your projects?).
 \ei
 \end{block}
+
+\end{frame}
+
+
+\begin{frame}{Small group lab exercise}
+
+\bi
+    \myitem Without adding any additional predictors into your model, experiment with different types of spline model fits. What is the best model that you can find? What criteria did you use to pick it?
+    \myitem For that model, plot the residuals. What does the residual plot tell you about the appropriateness of the model from both a scientific and statistical perspective?
+\ei
 
 \end{frame}
 
