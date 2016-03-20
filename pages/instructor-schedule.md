@@ -81,21 +81,28 @@ _Thurs, week 6_
 _Tues, week 7_
 
  - quiz 3
- - simulation lecture?
+ - simulation lecture
 
 _Thurs, week 7_
 
- - simulation workshop
+ - simulation study workshop: formulating questions about the simulation study
 
 _Tues, week 8_
 
- - power simulation lecture
- - simulation study workshop
+ - simulation study workshop: designing the details of the simulation study
 
 _Thurs, week 8_
 
- - review of key concepts from first 1/2 of semester
  - student presentations about common analysis pitfalls (45 min).
+ 
+ _Tues, week 9_
+
+ - Spline lecture and lab
+
+_Thurs, week 9_
+
+ - power analysis lecture and simulation study presentations.
+ 
  
  <!--
 
