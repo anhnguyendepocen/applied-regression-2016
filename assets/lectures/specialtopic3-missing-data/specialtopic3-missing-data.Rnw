@@ -64,31 +64,171 @@ theme_set(theme_bw())
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Missing data notation}
+
+\begin{block}{Data model}
+We assume we have a sample of $n$ observations, and we are primarily interested in the conditional distribution
+
+$$f(Y_i|\mathbf X_i, \mathbf \beta)$$
+
+We split $\mathbf X$ into two components, $\mathbf X^{obs}$ and $\mathbf X^{mis}$ for the observed and missing portions of $\mathbf X$, respectively.
+\end{block}
+
+\begin{block}{Missing data model}
+We define a response indicator, $\mathbf R$ to denote missingness: $R_j = 1$ if $X_j$ is observed, and 0 otherwise. Types of missingness can be categorized by how $Y$ and $\mathbf X$ relate to a probability model for R:
+
+$$p(\mathbf R | Y, \mathbf X)$$
+\end{block}
+
+\footnotesize Notation adapted from Horton and Kleinman, {\em American Statistician}, 2007.
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Types of Missing Data}
 
 \begin{block}{Missing Completely at Random (MCAR)}
 \bi
-    \myitem 
+    \myitem No data, observed or unobserved, are related to missingness.
+    \myitem $p(\mathbf R | Y, \mathbf X) = p(\mathbf R | Y, \mathbf X^{obs}, \mathbf X^{mis}) = p(\mathbf R|\mathbf \phi)$
 \ei
 \end{block}
 
 
 \begin{block}{Missing at Random (MAR)}
 \bi
-    \myitem 
+    \myitem No unobserved data are related to missingness, but observed data could be used to predict missingness.
+    \myitem $p(\mathbf R | Y, \mathbf X) = p(\mathbf R | Y, \mathbf X^{obs}, \mathbf \phi)$
 \ei
 \end{block}
 
-\begin{block}{Missing Not at Random (MNAR)}
+\begin{block}{Missing Not at Random (MNAR) or unignorable missingness}
 \bi
-    \myitem 
+    \myitem Missingness relationship cannot be simplified: it depends on unobserved data!
+    \myitem $p(\mathbf R | Y, \mathbf X) = p(\mathbf R | Y, \mathbf X)$
 \ei
 \end{block}
 
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Testing for the different types of data}
+
+
+\begin{block}{Tests about the type of data you have}
+\bi
+    \myitem MAR vs. MNAR: Not a definitive test here. Best option is to use your domain-specific knowledge about the data.
+    \myitem MCAR vs. MAR: Little's test can weigh evidence for/against these two settings.
+\ei
+\end{block}
+
+\begin{block}{Little's $H_0$: The data is MCAR}
+Low p-values suggest that the data are MAR; high p-values suggest they are MCAR.
+\end{block}
+
+<<littles-test, message=FALSE, warning=FALSE, cache=TRUE>>=
+library(openintro)
+data(ncbirths)
+test <- BaylorEdPsych::LittleMCAR(ncbirths)
+test$p.value
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Types of analyses for missing data}
+
+\begin{block}{Analysis strategies (in rough order of desirability, low to high)}
+\bi
+    \myitem MCAR only: Complete case a.k.a. ``listwise deletion''
+    \myitem Ad-hoc methods (e.g. mean imputation)
+    \myitem Weighting methods
+    \myitem MAR: Likelihood-based approaches (e.g. EM algorithm)
+    \myitem MAR: Multiple Imputation (many flavors)
+    \myitem MAR: Bayesian methods
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Types of analyses for missing data}
+
+\begin{block}{Analysis strategies (in rough order of desirability, low to high)}
+\bi
+    \myitem MCAR only: Complete case a.k.a. ``listwise deletion''
+    \myitem Ad-hoc methods (e.g. mean imputation)
+    \myitem Weighting methods
+    \myitem MAR: Likelihood-based approaches (e.g. EM algorithm)
+    \myitem MAR: Multiple Imputation (many flavors)
+    \myitem MAR: Bayesian methods
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Likelihood based approach}
+
+\includegraphics[width=.6\linewidth]{augmented-data.png}
+
+EM algorithm: weights and $\mathbf \beta$s are estimated iteratively.
+Limitations: complicated with continuous variables
+
+\footnotesize Figure credits Horton and Kleinman, {\em American Statistician}, 2007.
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation}
+
+\begin{block}{General approach}
+\bi
+    \myitem For each missingness pattern, a model is built to use the available covariates to estimate the missing covariates. 
+    \myitem Random samples are taken from the predictive distribution to create multiple ``complete'' datasets.
+    \myitem Typically, 10-15 datasets is seen as being sufficient.
+    \myitem Coefficient and SE estimates are combined across datasets.
+\ei
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation: example}
+
+\centering
+\includegraphics[width=.8\linewidth]{imputations_1.pdf}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Multiple imputation: example}
+
+\centering
+\includegraphics[width=.8\linewidth]{imputations_4.pdf}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -113,7 +253,31 @@ theme_set(theme_bw())
 
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Best practices}
+
+\begin{block}{Hard to argue with an approach that does the following:}
+\bi
+    \myitem quantify the completeness of covariate data
+    \myitem provide details about your approach for handling missing data
+    \myitem present and discuss patterns of or reasons for missing data
+\ei
+\end{block}
+
+\tiny{Proposed guidelines for reporting missing covariate data (Burton and Altman 2004)}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Summary}
+
+You will have practice with missing data methods, most importantly multiple imputation, in Lab 5!
+
+\end{frame}
+
 
 
 \end{document}
