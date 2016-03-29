@@ -27,6 +27,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * Special topic: [Multivariate data visualization](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-NHANES/Presentation-NHANES.html#1)
 * Special topic: [Simulation Studies](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf)
 * Special topic: [Power Simulation](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)
+* Special topic: [Missing Data](../assets/lectures/specialtopic3-missing-data/specialtopic3-missing-data.pdf)
 
 
 * [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf)
@@ -35,6 +36,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * [R code for Lab 3](../assets/labs/lab3-mlr-inference/sampling-distribution-simulation.R)
 * [Lab 3a](../assets/labs/lab3a-global-tests/global-tests.html)
 * [Lab 4](../assets/labs/lab4-mlr-selection/lab4-mlr-selection.pdf)
+* [Lab 5](../assets/labs/lab5-missing-data/lab5-amelia-missing-data.pdf)
 
 
 <!--
