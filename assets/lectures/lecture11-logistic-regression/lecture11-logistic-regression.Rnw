@@ -35,7 +35,7 @@
 
 <<setup, include=FALSE>>=
 library(knitr)
-opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='tiny')
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='footnotesize')
 @
 
 
@@ -141,11 +141,11 @@ CD & Average rate of smoking (cigarettes per day)
 
 \begin{frame}[fragile]{Lung cancer as a function of cigarettes per day}
 
-\tiny
-<<donnerPlot, echo=TRUE, fig.height=4>>=
-(p <- qplot(CD, as.numeric(LC=="LungCancer")*1, data=birds, geom=c("point", "smooth"), 
-            position=position_jitter(w=.7, h=0), method="lm", se=FALSE) + 
-     ylab("Lung Cancer") + xlab("Cigarettes per day") + scale_y_continuous(breaks=c(0,1)))
+<<donnerPlot, echo=TRUE, fig.height=3.8>>=
+(p <- ggplot(birds, aes(x=CD, y=as.numeric(LC=="LungCancer")*1)) + 
+     geom_jitter(height=0) + geom_smooth(method="lm", se=FALSE) + 
+     ylab("Lung Cancer") + xlab("Cigarettes per day") + 
+     scale_y_continuous(breaks=c(0,1)))
 @
 
 
@@ -328,7 +328,7 @@ $$logit(\mathbb E[Y_i|\mathbf x_i]) = logit (p_i)  = \eta =  \beta_0+\beta_1 X_{
 <<logisticGraph, echo=FALSE, fig.height=3>>=
 x <- seq(-6, 6, by=.1)
 y <- exp(x)/(1+exp(x))
-qplot(x, y, geom="line") + ggtitle("Logistic function") + xlab("x") + ylab("p") + annotate("text", x=-4, y=.75, label="p == frac(e^eta,1+e^eta)", parse=TRUE)
+qplot(x, y, geom="line") + ggtitle("Logistic function") + xlab("x") + ylab("p") + annotate("text", x=-4, y=.75, label="p == frac(e^x,1+e^x)", parse=TRUE)
 @
 
 
@@ -340,7 +340,6 @@ qplot(x, y, geom="line") + ggtitle("Logistic function") + xlab("x") + ylab("p") 
 
 $$logit Pr(LC=1|\mathbf x)  =  \beta_0 + \beta_1 BK + \beta_2 FM + \beta_3 SS + \beta_4 AG + \beta_5 YR + \beta_6 CD$$
 \vspace{-5mm}
-\tiny
 <<birdModel, tidy=FALSE>>=
 birds$LCnum <- as.numeric(birds$LC=="LungCancer")
 birds$BK <- relevel(birds$BK, ref="NoBird")
@@ -379,7 +378,7 @@ Keeping all other predictors constant then,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{What do the numbers not mean ...}
+\frametitle{What the numbers do not mean ...}
 
 The most common mistake made when interpreting logistic regression is to treat an odds ratio as a ratio of probabilities.\\
 
@@ -440,6 +439,7 @@ This is the difference between relative risk and an odds ratio.
 \bi
         \myitem How are logistic models (and other GLMs) fitted?
         \myitem Can we perform the same kind of model diagnostics to determine whether a model provides a good fit to data?
+        \myitem Do we have the same power to infer smooth splines in non-Gaussian GLMs?
         \myitem ROC curves and classification rules
         \ei
 \end{block}
