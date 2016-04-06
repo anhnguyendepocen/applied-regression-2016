@@ -1,0 +1,148 @@
+%% Module 2 beamer/knitr slides
+%% Biostatistics in Practice workshop, January 2014
+%% Nicholas Reich: nick [at] schoolph.umass.edu
+
+
+\documentclass[table]{beamer}
+
+
+\input{../../slide-includes/standard-knitr-beamer-preamble}
+
+%        The following variables are assumed by the standard preamble:
+%	Global variable containing module name:
+\title{Likelihood and Regression}
+%	Global variable containing module shortname:
+%		(Currently unused, may be used in future.)
+\newcommand{\ModuleShortname}{simPar}
+%	Global variable containing author name:
+\author{Nicholas G Reich}
+%	Global variable containing text of license terms:
+\newcommand{\LicenseText}{Made available under the Creative Commons Attribution-ShareAlike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/deed.en\_US }
+%	Instructor: optional, can leave blank.
+%		Recommended format: {Instructor: Jane Doe}
+\newcommand{\Instructor}{}
+%	Course: optional, can leave blank.
+%		Recommended format: {Course: Biostatistics 101}
+\newcommand{\Course}{}
+
+\input{../../slide-includes/shortcuts}
+\usepackage{bbm}
+\hypersetup{colorlinks=TRUE, urlcolor=blue}
+
+%%%%%%%% IMPORTANT -- MUST HAVE [fragile] for some/all frames chunks to have output work correctly. 
+
+\begin{document}
+
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='scriptsize')
+@
+
+
+\begin{frame}[plain]
+        \titlepage
+\end{frame}
+
+<<ggplot2, echo=FALSE, message=FALSE>>=
+require(ggplot2)
+theme_set(theme_bw())
+@
+
+
+\begin{frame}{Today's Lecture}
+
+\bi
+    \myitem Likelihood defined
+    \myitem Likelihood in the context of regression
+\ei
+
+These notes are based loosely on Michael Lavine's book \href{http://people.math.umass.edu/~lavine/Book/book.html}{Introduction to Statistical Thought}, Chapters 2.3-2.4.
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Parametric families of distributions}
+
+\begin{block}{A parametric distribution}
+\bi
+    \myitem In the analysis of real data, we often are willing to assume that our data come from a distribution whose general form we know, even if we don't know the exact distribution.
+    \myitem E.g. $X \sim Poisson(\lambda)$ or $Y \sim N(\mu, \sigma^2)$
+    \myitem Each of the above examples refer to families of distributions, defined or indexed by particular parameter(s).
+    \myitem In statistics, we try to estimate or learn about the unkown parameter.
+\ei
+\end{block}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{The likelihood function}
+
+\begin{block}{Another look at a pdf}
+\bi
+    \myitem Probability density functions (pdfs) define the probability of seeing a specific observed value of your random variable, conditional on a parameter.  $$f(X | \theta)$$
+    \myitem However, we can think about this same function another way, by {\em conditioning} on the data and looking at the probability taken by different values of the parameter.   $$f(\theta | X) = \ell (\theta)$$
+    \myitem Remember, the definition of the joint density of observations that we assume to be i.i.d.: if $X_1, X_2, ..., X_n \sim i.i.d. f(x|\theta)$ then 
+    $$f(X_1, \dots, X_n|\theta) = \prod f(X_i |\theta)$$
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Likelihood as evidence}
+
+\begin{center}
+``A wise man ... proportions his belief to his evidence.'' \\
+-David Hume, Scottish philosopher
+\end{center}
+
+We often compare values of the likelihood function as ratios, weighing the evidence for or against particular values of $\theta$.
+
+$$ \frac{\ell(\theta_1)}{\ell(\theta_2)} = 1$$
+implies we have the same evidence to support either $\theta_1$ or $\theta_2$.
+
+$$ \frac{\ell(\theta_1)}{\ell(\theta_2)} > 1$$
+implies we have more evidence to support $\theta_1$ over $\theta_2$.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{A simple, canonical example: coin-flipping}
+
+Let's flip some coins! A plausible statistical model here is for the number of heads ($X$) when I flip a coin $N$ times
+
+$$ X \sim Binomial (N, p)$$
+
+where
+
+$$ f(x|\theta) = \ell(\theta) = {n \choose x} \cdot \theta^x \cdot (1-\theta)^{n-x} $$
+
+<<lik-vs-pdf, message=FALSE, warning=FALSE, echo=FALSE, fig.height=3>>=
+dat <- data.frame(x = 0:20, prob = dbinom(0:20, size = 20, p = 0.5))
+p1 <- ggplot(dat, aes(x = x, y = prob))
+p1 <- p1 + geom_segment(aes(xend = x, yend = 0), size = 3) + ylab('f(x)') + ggtitle('N=20, theta=0.5')
+
+dat <- dplyr::data_frame(p=seq(0, 1, by=.01), lik=dbinom(10, size=20, p=p))
+p2 <- ggplot(dat, aes(x=p, y=lik)) + geom_line() + ggtitle('N=20, X=10') + ylab('likelihood')
+
+gridExtra::grid.arrange(p1, p2, ncol=2)
+@
+
+\end{frame}
+
+
+
+
+\end{document}
