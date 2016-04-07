@@ -44,7 +44,7 @@ opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size
 \end{frame}
 
 <<ggplot2, echo=FALSE, message=FALSE>>=
-require(ggplot2)
+library(ggplot2)
 theme_set(theme_bw())
 @
 
@@ -142,6 +142,21 @@ gridExtra::grid.arrange(p1, p2, ncol=2)
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{A simple, canonical example: coin-flipping}
+
+Let's start with three competing hypotheses about my coin and the probability of getting a head:
+
+\begin{eqnarray}
+H_A: p & = & 0.5 \\
+H_B: p & = & 0 \\
+H_C: p & = & 1 
+\end{eqnarray}
+
+\end{frame}
 
 
 
