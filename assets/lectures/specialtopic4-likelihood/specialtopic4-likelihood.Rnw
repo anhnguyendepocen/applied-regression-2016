@@ -56,7 +56,7 @@ theme_set(theme_bw())
     \myitem Likelihood in the context of regression
 \ei
 
-These notes are based loosely on Michael Lavine's book \href{http://people.math.umass.edu/~lavine/Book/book.html}{Introduction to Statistical Thought}, Chapters 2.3-2.4.
+These notes are based loosely on Michael Lavine's book \href{http://people.math.umass.edu/~lavine/Book/book.html}{Introduction to Statistical Thought}, Chapters 2.3-2.4 and 3.2.
 
 \end{frame}
 
@@ -119,6 +119,51 @@ implies we have more evidence to support $\theta_1$ over $\theta_2$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\begin{frame}[fragile]{Maximum likelihood estimation}
+
+% \begin{center}
+% ``A wise man ... proportions his belief to his evidence.'' \\
+% -David Hume, Scottish philosopher
+% \end{center}
+
+In many settings, there is a unique $\theta$ that maximizes $\ell(\theta)$. This value is called the maximum likelihood estimate (a.k.a. the MLE), and is defined
+$$\hat\theta = argmax_\theta \ell(\theta)$$
+
+\bi
+  \myitem MLEs are typically found by taking the derivative of $\log \ell(\theta)$ w.r.t. each parameter and setting equal to zero.
+  \myitem The likelihood surface is often well behaved, but not always! You could have multiple maxima, a maximum at the boundary of the parameter space, a non-differentiable $\ell$, etc...
+  \myitem MLEs are often intuitive, i.e. for $y_1, y_2, \cdots, y_n \sim N(\mu, \sigma^2)$ the MLE of $\mu$ is the sample mean. 
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Accuracy of estimation}
+
+% \begin{center}
+% ``A wise man ... proportions his belief to his evidence.'' \\
+% -David Hume, Scottish philosopher
+% \end{center}
+
+What other values, in addition to $\hat\theta$, have reasonably high likelihood? 
+
+We can define a likelihood set (akin to a confidence region) for some value $\alpha \in (0,1)$, as 
+
+$$ LS_\alpha := \left \{ \theta : \frac{\ell(\theta)}{\ell(\hat\theta)} \geq \alpha \right \} $$
+
+\bi
+  \myitem LS are often (nut not necessarily) intervals.
+  \myitem There is no best value of $\alpha$. Some people like 1/10. I like 1/8.
+  \myitem Typically, as $n \rightarrow \infty$ the likelihood becomes more peaked, and the size of LS shrinks.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \begin{frame}[fragile]{A simple, canonical example: coin-flipping}
 
 Let's flip some coins! A plausible statistical model here is for the number of heads ($X$) when I flip a coin $N$ times
@@ -127,15 +172,15 @@ $$ X \sim Binomial (N, p)$$
 
 where
 
-$$ f(x|\theta) = \ell(\theta) = {n \choose x} \cdot \theta^x \cdot (1-\theta)^{n-x} $$
+$$ f(x|p) = \ell(p) = {n \choose x} \cdot p^x \cdot (1-p)^{n-x} $$
 
 <<lik-vs-pdf, message=FALSE, warning=FALSE, echo=FALSE, fig.height=3>>=
 dat <- data.frame(x = 0:20, prob = dbinom(0:20, size = 20, p = 0.5))
 p1 <- ggplot(dat, aes(x = x, y = prob))
 p1 <- p1 + geom_segment(aes(xend = x, yend = 0), size = 3) + ylab('f(x)') + ggtitle('N=20, theta=0.5')
 
-dat <- dplyr::data_frame(p=seq(0, 1, by=.01), lik=dbinom(10, size=20, p=p))
-p2 <- ggplot(dat, aes(x=p, y=lik)) + geom_line() + ggtitle('N=20, X=10') + ylab('likelihood')
+source('http://tinyurl.com/coin-likelihood')
+p2 <- coin_lik(x=12, n=20)
 
 gridExtra::grid.arrange(p1, p2, ncol=2)
 @
@@ -150,14 +195,82 @@ gridExtra::grid.arrange(p1, p2, ncol=2)
 
 Let's start with three competing hypotheses about my coin and the probability of getting a head:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 H_A: p & = & 0.5 \\
 H_B: p & = & 0 \\
 H_C: p & = & 1 
-\end{eqnarray}
+\end{eqnarray*}
+
+<<eval=FALSE>>=
+source('http://tinyurl.com/coin-likelihood')
+coin_lik(x=2, n=4)
+@
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\begin{frame}[fragile]{Numerical optimization of a likelihood function}
+
+In R, you can write your own likelihood function and maximize it using one of any number of different functions. For example:
+
+<<>>=
+ll <- function(p, n, x) -dbinom(x=x, size=n, prob=p, log=TRUE)
+## for one-dimensional optimization
+optimize(ll, interval=c(0,1), n=10, x=5)
+## better for multi-dimensional optimization
+tmp <- optim(par=list(p=.4), ll, n=10, x=5)
+c(tmp$par, tmp$value)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Likelihood in a regression setting}
+
+We have our usual model
+$$ Y_i = \beta_0 + \beta_1 X_{1,i} + \cdots + \beta_p X_{p,i} + \epsilon_i $$
+where the $\epsilon_i$ are i.i.d. $N(0, \sigma^2)$.  So our likelihood function is 
+\begin{eqnarray*}
+\ell(\beta_0, \beta_1, \cdots, \beta_p, \sigma) & = & \prod_{i=1}^n p(y_i|\beta_0, \cdots, \beta_p, \sigma)
+\end{eqnarray*}
+\begin{eqnarray*}
+& = & \prod_{i=1}^n \frac{1}{\sqrt{2\pi}\sigma}\exp \left [ -\frac{1}{2}\left ( \frac{y_i-(\beta_0 + \sum\beta_jX_{j,i})}{\sigma}\right)^2 \right ] \\
+& = & \left (2\pi\sigma^2 \right )^{-\frac{n}{2}} \exp \left [ -\frac{1}{2\sigma^2} \sum_i \left ( y_i-(\beta_0 + \sum\beta_jX_{j,i})\right)^2 \right ]
+\end{eqnarray*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{(Log)-Likelihood in a regression setting}
+\begin{eqnarray*}
+\log \ell(\beta_0, \beta_1, \cdots, \beta_p, \sigma) & = & C - n\log\sigma - \\
+&  & \frac{1}{2\sigma^2}\sum_i \left ( y_i-(\beta_0 + \sum\beta_jX_{j,i})\right)^2
+\end{eqnarray*}
+where $C$ is an irrelevant constant. To find the maximum of this likelihood function, we take the derivative of these functions and this gives way to a set of linear equations to solve for the $\beta$s. And voila, we have our LSEs again! 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Likelihood take-aways}
+
+\bi
+  \myitem Likelihood is a flexible and principled framework for evaluating evidence in your data.
+  \myitem There is strong statistical theory behind likelihood.
+  \myitem Likelihood is the foundation on which much modern statistical analysis (including most Bayesian analysis) is built.
+\ei
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Finding your own MLEs for regression}
+
+Extra credit homework assignment: Take one of the datasets that we have used in class so far and fit a multiple linear regression model (with at least two predictors) using the {\tt optim()} function to obtain maximum likelihood estimators for the regression coefficients and $\sigma$. Compare your results to the results from {\tt lm()}. 
+
+\end{frame}
 
 \end{document}
