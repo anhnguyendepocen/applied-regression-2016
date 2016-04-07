@@ -2,6 +2,7 @@
 
 coin_lik <- function(x, n) {
   require(dplyr)
+  require(ggplot2)
   dat <- dplyr::data_frame(p=seq(0, 1, by=.01), lik=dbinom(x, size=n, p=p))
   p2 <- ggplot(dat, aes(x=p, y=lik)) + 
     geom_line() + 
