@@ -53,6 +53,7 @@ theme_set(theme_bw())
 
 \bi
     \myitem Likelihood defined
+    \myitem A simple, coin-flipping example
     \myitem Likelihood in the context of regression
 \ei
 
@@ -121,11 +122,6 @@ implies we have more evidence to support $\theta_1$ over $\theta_2$.
 
 \begin{frame}[fragile]{Maximum likelihood estimation}
 
-% \begin{center}
-% ``A wise man ... proportions his belief to his evidence.'' \\
-% -David Hume, Scottish philosopher
-% \end{center}
-
 In many settings, there is a unique $\theta$ that maximizes $\ell(\theta)$. This value is called the maximum likelihood estimate (a.k.a. the MLE), and is defined
 $$\hat\theta = argmax_\theta \ell(\theta)$$
 
@@ -142,10 +138,10 @@ $$\hat\theta = argmax_\theta \ell(\theta)$$
 
 \begin{frame}[fragile]{Accuracy of estimation}
 
-% \begin{center}
-% ``A wise man ... proportions his belief to his evidence.'' \\
-% -David Hume, Scottish philosopher
-% \end{center}
+\begin{center}
+``Doubt is not a pleasant condition, but certainty is an absurd one.'' \\
+-Voltaire, French writer and philosopher
+\end{center}
 
 What other values, in addition to $\hat\theta$, have reasonably high likelihood? 
 
@@ -154,7 +150,7 @@ We can define a likelihood set (akin to a confidence region) for some value $\al
 $$ LS_\alpha := \left \{ \theta : \frac{\ell(\theta)}{\ell(\hat\theta)} \geq \alpha \right \} $$
 
 \bi
-  \myitem LS are often (nut not necessarily) intervals.
+  \myitem LS are often (but not necessarily) intervals.
   \myitem There is no best value of $\alpha$. Some people like 1/10. I like 1/8.
   \myitem Typically, as $n \rightarrow \infty$ the likelihood becomes more peaked, and the size of LS shrinks.
 \ei
@@ -230,15 +226,15 @@ c(tmp$par, tmp$value)
 
 \begin{frame}[fragile]{Likelihood in a regression setting}
 
-We have our usual model
+We have our usual regression model
 $$ Y_i = \beta_0 + \beta_1 X_{1,i} + \cdots + \beta_p X_{p,i} + \epsilon_i $$
 where the $\epsilon_i$ are i.i.d. $N(0, \sigma^2)$.  So our likelihood function is 
 \begin{eqnarray*}
 \ell(\beta_0, \beta_1, \cdots, \beta_p, \sigma) & = & \prod_{i=1}^n p(y_i|\beta_0, \cdots, \beta_p, \sigma)
 \end{eqnarray*}
 \begin{eqnarray*}
-& = & \prod_{i=1}^n \frac{1}{\sqrt{2\pi}\sigma}\exp \left [ -\frac{1}{2}\left ( \frac{y_i-(\beta_0 + \sum\beta_jX_{j,i})}{\sigma}\right)^2 \right ] \\
-& = & \left (2\pi\sigma^2 \right )^{-\frac{n}{2}} \exp \left [ -\frac{1}{2\sigma^2} \sum_i \left ( y_i-(\beta_0 + \sum\beta_jX_{j,i})\right)^2 \right ]
+%& = & \prod_{i=1}^n \frac{1}{\sqrt{2\pi}\sigma}\exp \left [ -\frac{1}{2}\left ( \frac{y_i-(\beta_0 + \sum\beta_jX_{j,i})}{\sigma}\right)^2 \right ] \\
+ & = & \left (2\pi\sigma^2 \right )^{-\frac{n}{2}} \exp \left [ -\frac{1}{2\sigma^2} \sum_i \left ( y_i-(\beta_0 + \sum\beta_jX_{j,i})\right)^2 \right ]
 \end{eqnarray*}
 
 \end{frame}
