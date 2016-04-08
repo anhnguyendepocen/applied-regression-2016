@@ -29,6 +29,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * Special topic: [Simulation Studies](../assets/lectures/specialtopic1-simulation/specialtopic1-simulation.pdf)
 * Special topic: [Power Simulation](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)
 * Special topic: [Missing Data](../assets/lectures/specialtopic3-missing-data/specialtopic3-missing-data.pdf)
+* Special topic: [Likelihood](../assets/lectures/specialtopic4-likelihood/specialtopic4-likelihood.pdf)
 
 
 * [Lab 1](../assets/labs/lab1-intro-slr/lab1-intro-slr.pdf)

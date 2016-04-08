@@ -21,7 +21,7 @@ Week |       |     | Topic   | Notes | HW Due | Reading
      |     | 15, 17 | Spring Break! | | |
  9   |     | 22, 24 | Splines; Power Simulation | [Lec 10](../assets/lectures/lecture10-splines/lecture10-splines.pdf), [ST 2](../assets/lectures/specialtopic2-power-simulation/specialtopic2-power-simulation.pdf)  | [sims](group-pres-2.html) | _ISL_ Ch 7, H2*
  10  |     | 29, 31  | Missing data; Logistic regression | [ST3](../assets/lectures/specialtopic3-missing-data/specialtopic3-missing-data.pdf), [Lec 11](../assets/lectures/lecture11-logistic-regression/lecture11-logistic-regression.pdf) | |  [List](missing-data-reading-list.html); _ISL_ 4.1-3, _OI_ 8
- 11  | Apr | 5, 7   | Likelihood | | [Lab 5](../assets/labs/lab5-missing-data/lab5-amelia-missing-data.pdf) | _IST_ Ch 2.3-2.4
+ 11  | Apr | 5, 7   | Likelihood | [ST4](../assets/lectures/specialtopic4-likelihood/specialtopic4-likelihood.pdf) | [Lab 5](../assets/labs/lab5-missing-data/lab5-amelia-missing-data.pdf) | _IST_ Ch 2.3-2.4
  12  |     | 12, 14 | Longitudinal data analysis | <!--[Lec 14](../assets/lectures/lecture14-longitudinal-data/lecture14-longitudinal-data.pdf), [R](../assets/labs/wits-and-wagers-analysis.R)--> | |
  13  |     | 19, 21 | Project prep, presentations | | |
  14  |     | 26     | Project presentations | | |
