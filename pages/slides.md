@@ -21,6 +21,7 @@ The source code and PDF files associated with the lectures will be posted below 
 * Lecture 9: Multiple Linear Regression: Modeling Interactions \[ [S](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions.pdf) \| [A](../assets/lectures/lecture9-mlr-interaction/lecture9-mlr-interactions-annotated.pdf) \]
 * Lecture 10: Using splines in regression \[ [S](../assets/lectures/lecture10-splines/lecture10-splines.pdf)  \]
 * Lecture 11: Logistic regression \[ [S](../assets/lectures/lecture11-logistic-regression/lecture11-logistic-regression.pdf)  \]
+* Lecture 11: Longitudinal data analysis \[ [S](../assets/lectures/lecture12-longitudinal-data/lecture12-longitudinal-data.pdf)  \]
 
 
 * Special topic: [Data visualization principles](http://nickreich.github.io/data-stories-2016/assets/lectures/data-viz-ggplot/data-viz-ggplot.html)

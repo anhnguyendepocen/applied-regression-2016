@@ -35,7 +35,8 @@
 
 <<setup, include=FALSE>>=
 library(knitr)
-opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='footnotesize')
+library(ggplot2)
+opts_chunk$set(fig.path='figure/beamer-',fig.align='center',fig.show='hold',size='scriptsize')
 @
 
 
@@ -144,7 +145,7 @@ Why bother with LDA?
 	\myitem More efficient estimation of shared effects
 	\myitem Estimation of subject-level effects / correlation
 	\myitem The ability to ``borrow strength" -- use both subject- and population-level information
-        \myitem Repeated measures is a very common feature of real data!
+  \myitem Repeated measures is a very common feature of real data!
 \ei
 
 \end{frame}
@@ -155,9 +156,9 @@ Why bother with LDA?
 
 An example dataset comes from the Multicenter AIDS Cohort Study ({\tt CD4.txt}).
 \bi
-        \myitem 366 HIV+ individuals
+  \myitem 283 HIV+ individuals
 	\myitem Observation of CD4 cell count (a measure of disease progression)
-	\myitem Between 1 and 11 observations per subject (1888 total observations)
+	\myitem Between 1 and 14 observations per subject (1817 total observations)
 \ei
 
 \end{frame}
@@ -166,9 +167,10 @@ An example dataset comes from the Multicenter AIDS Cohort Study ({\tt CD4.txt}).
 
 \begin{frame}[fragile]{CD4 dataset}
 
-<<loadData>>=
-data <- read.table("CD4.txt", header = TRUE)
-head(data, 15)
+<<loadData, message=FALSE>>=
+library(timereg)
+data(cd4)
+head(cd4, 15)
 @
 \end{frame}
 
@@ -177,7 +179,7 @@ head(data, 15)
 \begin{frame}[fragile]{CD4 dataset}
 
 <<plotData, tidy=FALSE, fig.height=4>>=
-qplot(month, cd4, data=data)
+qplot(visit, cd4, data=cd4)
 @
 \end{frame}
 
@@ -186,8 +188,8 @@ qplot(month, cd4, data=data)
 \begin{frame}[fragile]{CD4 dataset}
 
 <<spagPlot, tidy=FALSE, fig.height=4>>=
-qplot(month, cd4, data=data, geom=c("point", "line"), 
-      group=ID)
+qplot(visit, cd4, data=cd4, geom=c("point", "line"), 
+      group=id)
 @
 \end{frame}
 
@@ -196,8 +198,8 @@ qplot(month, cd4, data=data, geom=c("point", "line"),
 \begin{frame}[fragile]{CD4 dataset}
 
 <<spagPlot2, tidy=FALSE, fig.height=4>>=
-qplot(month, cd4, data=data, geom=c("point", "line"), 
-      group=ID, alpha=I(.2))
+qplot(visit, cd4, data=cd4, geom=c("point", "line"), 
+      group=id, alpha=I(.2))
 @
 \end{frame}
 
@@ -206,10 +208,10 @@ qplot(month, cd4, data=data, geom=c("point", "line"),
 \begin{frame}[fragile]{CD4 dataset}
 
 <<spagPlot3, tidy=FALSE, fig.height=4>>=
-IDS <- unique(data$ID)
-data$highlight <- as.factor(data$ID %in% IDS[1:10])
-qplot(month, cd4, data=data, geom=c("point", "line"), 
-      group=ID, color=highlight, alpha=highlight) +
+ids <- unique(cd4$id)
+cd4$highlight <- as.factor(cd4$id %in% ids[1:10])
+qplot(visit, cd4, data=cd4, geom=c("point", "line"), 
+      group=id, color=highlight, alpha=highlight) +
         theme(legend.position="none")
 @
 \end{frame}
@@ -307,10 +309,10 @@ With GEE, assume  $V_{i}$ is exchangeable.
 
 \scriptsize
 <<MM, message=FALSE, results='hide', tidy=FALSE>>=
-require(gee)
-linmod <- lm(cd4~month, data=data)
-geemod <- gee(cd4~month, data=data, id=ID, 
-              corstr="exchangeable")
+library(geepack)
+linmod <- lm(cd4~visit, data=cd4)
+geemod <- geeglm(cd4~visit, data=cd4, id=id, 
+                 corstr="exchangeable")
 @
 
 
@@ -332,6 +334,109 @@ summary(geemod)$coef
 
 
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Looking at the correlation structures: exchangeable}
+
+\scriptsize
+<<mmoutput1>>=
+summary(geemod)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Looking at the correlation structures: AR(1)}
+
+\tiny
+<<mmoutput2>>=
+geemod1 <- geeglm(cd4~visit, data=cd4, id=id, 
+                  corstr="ar1")
+summary(geemod1)
+@
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Comparing different GEE models}
+
+\begin{block}{Not a straight-forward way to compare different correlation structures}
+\bi
+  \myitem Some work on AIC in the context of GEEs (\href{http://www.jstor.org/stable/2676849}{Pan, 2001})
+  \myitem Not implemented in standard GEE packages
+  \myitem In practice, knowledge of data structure guides choice.
+\ei
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Marginal model}
+
+The marginal model formulation is
+$$ \by = \bX \bbeta + \bepsilon$$
+where
+\bi
+	\myitem $\bepsilon \sim \N{0}{\sigma^2 V}$
+\ei
+
+This approach focuses on the {\em marginal} distribution of $\by$, rather than on a subject-level {\em conditional} distribution.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Can use Generalized Least Squares}
+
+Given the model
+	$$ \by = \bX \bbeta + \bepsilon$$ 
+where $\bepsilon \sim N(0, \sigma^2 V)$ with $V$ known, we are essentially assuming
+	$$ \by \sim N(\bX \bbeta, \sigma^2 V)$$
+Using MLE, we find that
+$\hat{\bbeta}_{GLS} = (\bX^{T}V^{-1} \bX)^{-1}\bX^{T} V^{-1}\by$
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Estimation -- marginal model}
+
+\bi
+	\myitem If we can use MLE when $V$ is known, maybe we can use MLE to estimate $V$ as well
+	\myitem Our log likelihood function is
+	\beqa
+		l(\bbeta, \sigma^2, V; \by, \bX)  & = & -\frac{1}{2}\left[ n \log(\sigma^2) + \log(|V|) \right.\\
+		&&\left. + \frac{1}{\sigma^2} ( \by - \bX \bbeta)^{T} V^{-1} ( \by - \bX \bbeta)\right]
+	\eeqa
+	\myitem Using profile likelihood, we find that for any $V_0$
+		$$\hat{\bbeta}(V_0)= (\bX^{T} V_0^{-1} \bX)^{-1}\bX^{T} V_0^{-1}\by$$
+\ei
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Estimation -- marginal model}
+
+\bi
+	\myitem Estimation of $V$ and $\sigma$ is done through restricted maximum likelihood
+	\bi
+		\item Standard MLE produces biased variance estimates; REML adjusts for the number of fixed effects components that are estimated
+	\ei
+	\myitem Often $V$ is structured parametrically to ease estimation and computation
+	\myitem We won't worry about how this is done
+\ei
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -364,8 +469,8 @@ Under this model
 
 \scriptsize
 <<REmod, message=FALSE, warning=FALSE>>=
-require(lme4)
-memod <- lmer(cd4 ~ (1 | ID) + month, data = data)
+library(lme4)
+memod <- lmer(cd4 ~ (1 | id) + visit, data = cd4)
 summary(memod)$coef
 summary(geemod)$coef
 @
