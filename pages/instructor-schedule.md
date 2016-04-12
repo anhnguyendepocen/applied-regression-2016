@@ -101,7 +101,26 @@ _Thurs, week 8_
 
 _Thurs, week 9_
 
- - power analysis lecture and simulation study presentations.
+ - simulation study presentations.
+
+_Tues, week 10_
+
+ - power analysis lecture 
+ 
+_Thurs, week 10_
+
+ - likelihood lecture
+
+_Tues, week 11_
+
+ - LDA lecture
+ 
+_Thurs, week 11_
+
+ - LDA lecture?
+
+ 
+
  
  
  <!--
