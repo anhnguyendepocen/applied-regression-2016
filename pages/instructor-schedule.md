@@ -103,22 +103,43 @@ _Thurs, week 9_
 
  - simulation study presentations.
 
-_Tues, week 10_
+ _Tues, week 10_
 
- - power analysis lecture 
- 
+ - Missing data
+
 _Thurs, week 10_
 
- - likelihood lecture
+ - Logistic regression lecture
 
 _Tues, week 11_
 
- - LDA lecture
+ - power analysis lecture 
  
 _Thurs, week 11_
 
- - LDA lecture?
+ - likelihood lecture
 
+_Tues, week 12_
+
+ - LDA lecture
+ 
+_Thurs, week 12_
+
+ - cancelled
+ 
+_Tues, week 13_
+
+ - Logistic regression quiz
+ - course evals
+ - project prep time
+ 
+_Thurs, week 13_
+
+ - presentations
+ 
+_Tues, week 14_
+
+ - presentations
  
 
  
